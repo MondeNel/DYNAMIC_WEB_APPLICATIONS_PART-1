@@ -31,6 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
         authorsSelect.appendChild(authorsFragment);
     }
 
+
+    const settingsForm = document.querySelector('[data-settings-form]');
+    if (settingsForm) {
+        settingsForm.addEventListener('submit', handleSettingsFormSubmit);
+    }
+
+    const searchForm = document.querySelector('[data-search-form]');
+    if (searchForm) {
+        searchForm.addEventListener('submit', event => {
+            handleSearchFormSubmit(event, booksList, updateBookList);
+        });
+    }
+    
     const searchGenresContainer = document.querySelector('[data-search-genres]');
     if (searchGenresContainer) {
         searchGenresContainer.innerHTML = '';
@@ -42,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchAuthorsContainer.innerHTML = '';
         searchAuthorsContainer.appendChild(authorsFragment);
     }
+
 
     loadMoreBooks();
     loadInitialBooks();
