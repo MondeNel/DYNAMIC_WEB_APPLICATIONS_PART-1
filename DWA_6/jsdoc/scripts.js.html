@@ -91,7 +91,8 @@ function createPreview(bookData) {
 
 
 
-/** ====================================================== Show more button ============================================================*/
+/* ======================================================== SHOW MORE BUTTON ======================================================== */
+
 
 /**
  * Loads the initial books and sets up 'Load More' functionality.
@@ -159,6 +160,203 @@ document.addEventListener('DOMContentLoaded', loadInitialBooks);
 
 
 
+/** 
+ *  Creates genre options and appends them to a select element.
+ * 
+ * @param {HTMLElement} container - The container element to which options will be appended.
+ * @param {DocumentFragment} fragment - The fragment containing genre options.
+ */
+function createGenreOptions(container, fragment) {
+    container.innerHTML = '';
+
+    const allGenresOption = document.createElement('option');
+    allGenresOption.value = 'any';
+    allGenresOption.innerText = 'All Genres';
+    fragment.appendChild(allGenresOption);
+
+    const genresEntries = Object.entries(genres);
+
+    for (const [id, name] of genresEntries) {
+        const genreOption = document.createElement('option');
+        genreOption.value = id;
+        genreOption.innerText = name;
+        fragment.appendChild(genreOption);
+    }
+
+    container.appendChild(allGenresOption);
+    container.appendChild(fragment);
+}
+
+// Create genre options and append them to the genres select element
+const genresFragment = document.createDocumentFragment();
+const genresSelect = document.querySelector('[data-list-genres]');
+if (genresSelect) {
+    createGenreOptions(genresSelect, genresFragment);
+}
+
+// Create genre options and append them to the search genres container element
+const searchGenresContainer = document.querySelector('[data-search-genres]');
+if (searchGenresContainer) {
+    createGenreOptions(searchGenresContainer, genresFragment);
+}
+
+
+
+/** 
+ * Creates author options and appends them to a select element.
+ * 
+ * @param {HTMLElement} container - The container element to which options will be appended.
+ * @param {DocumentFragment} fragment - The fragment containing author options.
+ * @param {Object} authors - The authors data with ID as key and name as value.
+ */
+function createAuthorOptions(container, fragment, authors) {
+    container.innerHTML = '';
+
+    const allAuthorsOption = document.createElement('option');
+    allAuthorsOption.value = 'any';
+    allAuthorsOption.innerText = 'All Authors';
+    fragment.appendChild(allAuthorsOption);
+
+    const authorsEntries = Object.entries(authors);
+
+    for (const [id, name] of authorsEntries) {
+        const authorOption = document.createElement('option');
+        authorOption.value = id;
+        authorOption.innerText = name;
+        fragment.appendChild(authorOption);
+    }
+
+    container.appendChild(allAuthorsOption);
+    container.appendChild(fragment);
+}
+
+
+
+
+// Create author options and append them to the authors select element
+const authorsFragment = document.createDocumentFragment();
+const authorsSelect = document.querySelector('[data-list-authors]');
+if (authorsSelect) {
+    createAuthorOptions(authorsSelect, authorsFragment, authors);
+}
+
+// Create author options and append them to the search authors select element
+const searchAuthorsSelect = document.querySelector('[data-search-authors]');
+if (searchAuthorsSelect) {
+    createAuthorOptions(searchAuthorsSelect, authorsFragment, authors);
+}
+
+
+
+/**
+ * Handles theme toggling and preference storage.
+ */
+document.addEventListener('DOMContentLoaded', function () {
+    // Determine preferred color scheme (dark/light)
+    const isDarkModePreferred = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let theme = isDarkModePreferred ? 'night' : 'day';
+
+    // Theme color values
+    const themeColors = {
+        day: {
+            dark: '10, 10, 20',
+            light: '255, 255, 255',
+        },
+        night: {
+            dark: '255, 255, 255',
+            light: '10, 10, 20',
+        },
+    };
+
+    /**
+     * Toggles the theme and updates color properties.
+     */
+    function toggleTheme() {
+        theme = theme === 'day' ? 'night' : 'day';
+        document.documentElement.style.setProperty('--color-dark', themeColors[theme].dark);
+        document.documentElement.style.setProperty('--color-light', themeColors[theme].light);
+    }
+
+    /**
+     * Displays the theme selection dialog.
+     */
+    function showThemeSelectionDialog() {
+        // Get necessary DOM elements
+        const themeDialog = document.querySelector('[data-settings-overlay]');
+        const overlayButtons = document.querySelector('.overlay__buttons');
+        const dataListMessage = document.querySelector('[data-list-message]');
+
+        // Show dialog and adjust elements
+        if (themeDialog &amp;&amp; overlayButtons &amp;&amp; dataListMessage) {
+            dataListMessage.style.display = 'none';
+            overlayButtons.style.display = 'flex';
+            themeDialog.showModal();
+        }
+    }
+
+    /**
+     * Handles theme selection and saves preference.
+     * @param {Event} event - The submit event.
+     */
+    function handleThemeSelectionAndSave(event) {
+        event.preventDefault();
+
+        const selectedTheme = document.querySelector('[data-settings-theme]').value;
+        if (selectedTheme === 'day' || selectedTheme === 'night') {
+            // Save theme preference
+            localStorage.setItem('themePreference', selectedTheme);
+
+            theme = selectedTheme;
+            document.documentElement.style.setProperty('--color-dark', themeColors[theme].dark);
+            document.documentElement.style.setProperty('--color-light', themeColors[theme].light);
+        }
+
+        // Close the theme selection dialog
+        const themeDialog = document.querySelector('[data-settings-overlay]');
+        themeDialog.close();
+    }
+
+    /**
+     * Handles cancel button click.
+     * @param {Event} event - The click event.
+     */
+    function handleCancelButtonClick(event) {
+        event.preventDefault();
+        const themeDialog = document.querySelector('[data-settings-overlay]');
+        themeDialog.close();
+    }
+
+    // Attach event listeners
+    const dataHeaderSettings = document.querySelector('[data-header-settings]');
+    if (dataHeaderSettings) {
+        dataHeaderSettings.addEventListener('click', showThemeSelectionDialog);
+    }
+
+    const themeSelectionForm = document.querySelector('[data-settings-form]');
+    if (themeSelectionForm) {
+        themeSelectionForm.addEventListener('submit', handleThemeSelectionAndSave);
+    }
+
+    const cancelButton = document.querySelector('[data-cancel-button]');
+    if (cancelButton) {
+        cancelButton.addEventListener('click', handleCancelButtonClick);
+    }
+
+    // Set initial theme colors
+    document.documentElement.style.setProperty('--color-dark', themeColors[theme].dark);
+    document.documentElement.style.setProperty('--color-light', themeColors[theme].light);
+
+    // Configure data list button
+    const dataListButton = document.querySelector('[data-list-button]');
+    if (dataListButton) {
+        const remainingBooks = books.length - (page * BOOKS_PER_PAGE);
+        const remainingText = remainingBooks > 0 ? remainingBooks : 0;
+
+        dataListButton.innerHTML = `&lt;span>Show more&lt;/span>&lt;span class="list__remaining">(${remainingText})&lt;/span>`;
+        dataListButton.disabled = !(remainingBooks > 0);
+        dataListButton.addEventListener('click', loadMoreBooks);
+    }
+});
 </code></pre>
         </article>
     </section>
@@ -169,13 +367,13 @@ document.addEventListener('DOMContentLoaded', loadInitialBooks);
 </div>
 
 <nav>
-    <h2><a href="index.html">BookConnect documentation</a></h2><h3>Global</h3><ul><li><a href="global.html#createPreview">createPreview</a></li><li><a href="global.html#loadInitialBooks">loadInitialBooks</a></li><li><a href="global.html#loadMoreBooks">loadMoreBooks</a></li></ul>
+    <h2><a href="index.html">BookConnect documentation</a></h2><h3>Global</h3><ul><li><a href="global.html#createAuthorOptions">createAuthorOptions</a></li><li><a href="global.html#createGenreOptions">createGenreOptions</a></li><li><a href="global.html#createPreview">createPreview</a></li><li><a href="global.html#loadInitialBooks">loadInitialBooks</a></li><li><a href="global.html#loadMoreBooks">loadMoreBooks</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Aug 24 2023 15:08:07 GMT+0200 (South Africa Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Aug 24 2023 15:23:20 GMT+0200 (South Africa Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
