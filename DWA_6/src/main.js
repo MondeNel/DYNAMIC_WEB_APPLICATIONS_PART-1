@@ -1,25 +1,13 @@
 /** ============================================== Importing Data and Constants ===================================*/
 
 import { books, genres, BOOKS_PER_PAGE, authors } from "./data.js";
-
 import { loadMoreBooks, loadInitialBooks } from './loadMoreBooks.js';
-
-
+import { initializeGenres } from './genres.js';
 
 const booksList = books; // Assuming books array is available
 let matches = books.slice(0, BOOKS_PER_PAGE);
 let page = 1;
 const range = [(page - 1) * BOOKS_PER_PAGE, page * BOOKS_PER_PAGE];
-
-
-document.addEventListener('DOMContentLoaded', loadMoreBooks);
-document.addEventListener('DOMContentLoaded', loadInitialBooks);
-
-
-
-
-
-
 
 
 
@@ -28,96 +16,39 @@ document.addEventListener('DOMContentLoaded', loadInitialBooks);
 
 /** ===========================================  Create genres ================================================ */
 
+document.addEventListener('DOMContentLoaded', () => {
+    const genresFragment = initializeGenres(genres);
 
-/**
- * This line creates an empty DocumentFragment called genresFragment. 
- * A DocumentFragment is a lightweight container to hold a group of DOM nodes without adding them to the main DOM tree. 
- * It is used here to efficiently construct multiple DOM elements before adding them to the actual DOM.
- */
-const genresFragment = document.createDocumentFragment();
+    const genresSelect = document.querySelector('[data-list-genres]');
+    if (genresSelect) {
+        genresSelect.innerHTML = '';
+        genresSelect.appendChild(genresFragment);
+    }
 
-/**
- * This block of code creates an <option> element representing the "All Genres" option and appends it to 
- * the genresFragment. 
- * The value attribute is set to 'any', and the text content inside the <option> is set to 'All Genres'.
- */
-const allGenresOption = document.createElement('option');
-allGenresOption.value = 'any';
-allGenresOption.innerText = 'All Genres';
-genresFragment.appendChild(allGenresOption);
+    const searchGenresContainer = document.querySelector('[data-search-genres]');
+    if (searchGenresContainer) {
+        searchGenresContainer.innerHTML = '';
+        searchGenresContainer.appendChild(genresFragment);
+    }
 
-
-
-/**
- * This line converts the genres object into an array of arrays (genresEntries), 
- * where each inner array contains a key-value pair from the genres object. 
- * Each key-value pair represents a genre's id and name.
- */
-const genresEntries = Object.entries(genres);
+    loadMoreBooks();
+    loadInitialBooks();
+});
 
 
 
-/**
- * This for...of loop iterates through each [id, name] pair in genresEntries. 
- * For each genre, it creates a new <option> element and sets its value attribute to the id 
- * and the text content to the name. 
- * Then, it appends each genre <option> to the genresFragment.
- */
-for (const [id, name] of genresEntries) {
-
-    const genreOption = document.createElement('option');
-    genreOption.value = id;
-    genreOption.innerText = name;
-    genresFragment.appendChild(genreOption);
-}
-
-
-/**
- * This line retrieves the reference to the HTML <select> element with the attribute data-list-genres. 
- * This element represents the select box where the genre options will be appended.
- */
-const genresSelect = document.querySelector('[data-list-genres]');
 
 
 
-/**
- * This block of code appends the genre options to the select box (genresSelect). 
- * First, it clears the select box by setting its innerHTML to an empty string, effectively removing any existing options. 
- * Then it appends the "All Genres" option (allGenresOption) and the genre options from the genresFragment to the select box.
- */
-if (genresSelect) {
-
-    // Clear the select element first to remove any existing options
-    genresSelect.innerHTML = '';
-
-    // Append the genre options from the fragment to the select element
-    genresSelect.appendChild(allGenresOption);
-    genresSelect.appendChild(genresFragment);
-}
-
-
-/**
- * This line retrieves the reference to the HTML element with the attribute data-search-genres. 
- * This element represents the select box in the search area where the genre options will be appended.
- */
-const searchGenresContainer = document.querySelector('[data-search-genres]');
 
 
 
-/**
- * This block of code does the same as the previous block, 
- * but for the select box in the search area (searchGenresContainer). 
- * It clears the select box and appends the "All Genres" option and the genre options 
- * from the genresFragment to the search select box.
- */
-if (searchGenresContainer) {
-    // Clear the select element first to remove any existing options
-    searchGenresContainer.innerHTML = '';
 
-    // Append the genre options from the fragment to the select element
-    searchGenresContainer.appendChild(allGenresOption);
-    searchGenresContainer.appendChild(genresFragment);
-}
+
+
+
+
+
 
 
 

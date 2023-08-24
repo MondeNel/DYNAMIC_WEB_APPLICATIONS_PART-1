@@ -1,6 +1,5 @@
-export function createGenreOptions(genres) {
+export function initializeGenres(genres) {
     const genresFragment = document.createDocumentFragment();
-
     const allGenresOption = document.createElement('option');
     allGenresOption.value = 'any';
     allGenresOption.innerText = 'All Genres';
@@ -17,5 +16,3 @@ export function createGenreOptions(genres) {
 
     return genresFragment;
 }
-
-
