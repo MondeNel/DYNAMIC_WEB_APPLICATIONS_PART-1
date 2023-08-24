@@ -29,7 +29,7 @@
     "xmlcreate": "^2.0.4"
   },
   "scripts": {
-    "jsdoc": "jsdoc -c jsdoc.json"
+    "doc": "jsdoc -c jsdoc.json"
   },
   "keywords": [],
   "author": "",
