@@ -1,8 +1,8 @@
-/** ============================================== Importing Data and Constants ===================================*/
-
 import { books, genres, BOOKS_PER_PAGE, authors } from "./data.js";
 import { loadMoreBooks, loadInitialBooks } from './loadMoreBooks.js';
 import { initializeGenres } from './genres.js';
+import { initializeAuthors } from './authors.js';
+import { initializeTheme } from './theme.js';
 
 const booksList = books; // Assuming books array is available
 let matches = books.slice(0, BOOKS_PER_PAGE);
@@ -13,11 +13,9 @@ const range = [(page - 1) * BOOKS_PER_PAGE, page * BOOKS_PER_PAGE];
 
 
 
-
-/** ===========================================  Create genres ================================================ */
-
 document.addEventListener('DOMContentLoaded', () => {
     const genresFragment = initializeGenres(genres);
+    const authorsFragment = initializeAuthors(authors);
 
     const genresSelect = document.querySelector('[data-list-genres]');
     if (genresSelect) {
@@ -25,10 +23,22 @@ document.addEventListener('DOMContentLoaded', () => {
         genresSelect.appendChild(genresFragment);
     }
 
+    const authorsSelect = document.querySelector('[data-list-authors]');
+    if (authorsSelect) {
+        authorsSelect.innerHTML = '';
+        authorsSelect.appendChild(authorsFragment);
+    }
+
     const searchGenresContainer = document.querySelector('[data-search-genres]');
     if (searchGenresContainer) {
         searchGenresContainer.innerHTML = '';
         searchGenresContainer.appendChild(genresFragment);
+    }
+
+    const searchAuthorsContainer = document.querySelector('[data-search-authors]');
+    if (searchAuthorsContainer) {
+        searchAuthorsContainer.innerHTML = '';
+        searchAuthorsContainer.appendChild(authorsFragment);
     }
 
     loadMoreBooks();
@@ -59,96 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
 /** =============================================== data-search-authors ==========================================  */
 
-/**
- * This line creates an empty DocumentFragment called authorsFragment. Like the previous examples, a DocumentFragment
- */
-const authorsFragment = document.createDocumentFragment();
 
-
-
-/**
- * This block of code creates an <option> element representing the "All Authors" 
- * option and appends it to the authorsFragment. 
- * The value attribute is set to 'any', and the text content inside the <option> is set to 'All Authors'.
- */
-const allAuthorsOption = document.createElement('option');
-allAuthorsOption.value = 'any';
-allAuthorsOption.innerText = 'All Authors';
-authorsFragment.appendChild(allAuthorsOption);
-
-
-
-/**
- * This line converts the authors object into an array of arrays (authorsEntries), 
- * where each inner array contains a key-value pair from the authors object. 
- * Each key-value pair represents an author's id and name.
- */
-const authorsEntries = Object.entries(authors);
-
-
-
-/**
- * This for...of loop iterates through each [id, name] pair in authorsEntries. 
- * For each author, it creates a new <option> element and sets its value attribute to the id, 
- * and the text content to the name.
- * Then, it appends each author <option> to the authorsFragment.
- */
-for (const [id, name] of authorsEntries) {
-    // Create a new option element for each author
-    const authorOption = document.createElement('option');
-    authorOption.value = id;
-    authorOption.innerText = name;
-    authorsFragment.appendChild(authorOption);
-}
-
-
-
-/**
- * This line retrieves the reference to the HTML <select> element with the attribute data-list-authors. 
- * This element represents the select box where the author options will be appended.
- */
-const authorsSelect = document.querySelector('[data-list-authors]');
-
-
-
-/**
- * This block of code appends the author options to the select box (authorsSelect). 
- * First, it clears the select box by setting its innerHTML to an empty string, 
- * effectively removing any existing options. Then, it appends the "All Authors" option 
- * (allAuthorsOption) and the author options from the authorsFragment to the select box.
- */
-if (authorsSelect) {
-    // Clear the select element first to remove any existing options
-    authorsSelect.innerHTML = '';
-
-    // Append the author options from the fragment to the select element
-    authorsSelect.appendChild(allAuthorsOption);
-    authorsSelect.appendChild(authorsFragment);
-}
-
-
-/**
- * This line retrieves the reference to the HTML element with the attribute data-search-authors. 
- * This element represents the select box in the search area where the author options will be appended.
- */
-const searchAuthorsSelect = document.querySelector('[data-search-authors]');
-
-
-
-/**
- * This block of code does the same as the previous block, but for the select box in the search area (searchAuthorsSelect). 
- * It clears the select box and appends the "All Authors" option and the author options from the authorsFragment to the search select box.
- */
-if (searchAuthorsSelect) {
-    // Clear the select element first to remove any existing options
-    searchAuthorsSelect.innerHTML = '';
-
-    // Append the author options from the fragment to the select element
-    searchAuthorsSelect.appendChild(allAuthorsOption);
-    searchAuthorsSelect.appendChild(authorsFragment);
-}
 
 
 
@@ -161,171 +85,10 @@ if (searchAuthorsSelect) {
 
 /** ================================================= Theme Settings ================================================= */
 
-
-/**
- * The event listener waits for the DOM to be fully loaded before executing the enclosed code. 
- * It starts by checking if the user's device or browser preference is set to dark mode. 
- * The matchMedia method with the media query string '(prefers-color-scheme: dark)' 
- * is used to detect if the user prefers dark mode.
- */
 document.addEventListener('DOMContentLoaded', function () {
-    // Check if the user prefers dark mode
-    const isDarkModePreferred = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-
-    /**
-     * A variable theme is declared and initialized based on the user's dark mode preference. 
-     * If isDarkModePreferred is true, the theme is set to 'night'; otherwise, it's set to 'day'.
-     */
-    let theme = isDarkModePreferred ? 'night' : 'day';
-
-
-    /**
-     * An object themeColors is defined, which contains color values for both day and night themes. 
-     * Each theme has two color values, dark and light, represented as RGB values.
-     */
-    const themeColors = {
-        day: {
-            dark: '10, 10, 20',
-            light: '255, 255, 255',
-        },
-        night: {
-            dark: '255, 255, 255',
-            light: '10, 10, 20',
-        },
-    };
-
-    /**
-     * This is a function named toggleTheme responsible for toggling between the day and night themes. 
-     * It changes the theme variable based on its current value. Then it updates the CSS variables --color-dark 
-     * and --color-light on the documentElement (HTML root element) to apply the selected theme's colors.
-     */
-    function toggleTheme() {
-        theme = theme === 'day' ? 'night' : 'day';
-        document.documentElement.style.setProperty('--color-dark', themeColors[theme].dark);
-        document.documentElement.style.setProperty('--color-light', themeColors[theme].light);
-    }
-
-
-
-    /**
-     * This function showThemeSelectionDialog is called when the user clicks on the element with the attribute 
-     * [data-header-settings]. It retrieves references to the theme selection dialog, overlay buttons, 
-     * and the "No results found" message element using document.querySelector.
-     */
-    function showThemeSelectionDialog() {
-        const themeDialog = document.querySelector('[data-settings-overlay]');
-        const overlayButtons = document.querySelector('.overlay__buttons');
-        const dataListMessage = document.querySelector('[data-list-message]');
-
-
-        /**
-         * If all the required elements are found (themeDialog, overlayButtons, and dataListMessage), 
-         * this block of code hides the "No results found" message and shows the overlay buttons (cancel and save buttons). 
-         * Finally, it displays the theme selection dialog using the showModal method.
-         */
-        if (themeDialog && overlayButtons && dataListMessage) {
-            // Hide the "No results found" message
-            dataListMessage.style.display = 'none';
-
-            // Show the overlay buttons
-            overlayButtons.style.display = 'flex';
-
-            // Show the theme selection dialog
-            themeDialog.showModal();
-        }
-    }
-
-    /**
-     * This function handleThemeSelectionAndSave is called when the user submits the theme selection form. 
-     * It prevents the default form submission behavior (event.preventDefault()), retrieves the selected theme value, 
-     * and saves it to the local storage. Then, it updates the theme variable and applies the selected theme colors 
-     * to the CSS variables. 
-     * Finally, it closes the theme selection dialog using themeDialog.close().
-     */
-    function handleThemeSelectionAndSave(event) {
-        event.preventDefault();
-
-        const selectedTheme = document.querySelector('[data-settings-theme]').value;
-        if (selectedTheme === 'day' || selectedTheme === 'night') {
-            // Save the user's theme preference to local storage
-            localStorage.setItem('themePreference', selectedTheme);
-
-            // Update the theme based on the user's selection
-            theme = selectedTheme;
-            document.documentElement.style.setProperty('--color-dark', themeColors[theme].dark);
-            document.documentElement.style.setProperty('--color-light', themeColors[theme].light);
-        }
-
-        // Close the theme selection dialog
-        const themeDialog = document.querySelector('[data-settings-overlay]');
-        themeDialog.close();
-    }
-
-
-    /**
-     * This function handleCancelButtonClick is called when the user clicks on the cancel button in the theme selection dialog.
-     * It prevents the default button
-     */
-    function handleCancelButtonClick(event) {
-        event.preventDefault();
-        const themeDialog = document.querySelector('[data-settings-overlay]');
-        themeDialog.close();
-    }
-
-
-    /**
-     * This code retrieves the reference to the element with the attribute [data-header-settings] 
-     * (presumably a settings icon or button). If found, it attaches the showThemeSelectionDialog function to its click event. 
-     * This means that when the user clicks on the settings icon/button, the theme selection dialog will be shown.
-     */
-    const dataHeaderSettings = document.querySelector('[data-header-settings]');
-
-    // Attach the toggleTheme function to the data-header-settings element's click event
-    if (dataHeaderSettings) {
-        dataHeaderSettings.addEventListener('click', showThemeSelectionDialog);
-    }
-
-
-    /**
-     * 
-     */
-    const themeSelectionForm = document.querySelector('[data-settings-form]');
-
-    // Attach the handleThemeSelectionAndSave function to the form's submit event
-    if (themeSelectionForm) {
-        themeSelectionForm.addEventListener('submit', handleThemeSelectionAndSave);
-    }
-
-    // Get the cancel button
-    const cancelButton = document.querySelector('[data-cancel-button]');
-
-    // Attach the handleCancelButtonClick function to the cancel button's click event
-    if (cancelButton) {
-        cancelButton.addEventListener('click', handleCancelButtonClick);
-    }
-
-    // Apply the selected theme colors to the document
-    document.documentElement.style.setProperty('--color-dark', themeColors[theme].dark);
-    document.documentElement.style.setProperty('--color-light', themeColors[theme].light);
-
-    // Update the "Show more" button with the remaining books count
-    const dataListButton = document.querySelector('[data-list-button]');
-    if (dataListButton) {
-        const remainingBooks = books.length - (page * BOOKS_PER_PAGE);
-        const remainingText = remainingBooks > 0 ? remainingBooks : 0;
-
-        // Set the innerHTML of the "Show more" button with the remaining books count
-        dataListButton.innerHTML = `<span>Show more</span><span class="list__remaining">(${remainingText})</span>`;
-
-        // Disable the "Show more" button if there are no remaining books
-        dataListButton.disabled = !(remainingBooks > 0);
-
-        // Attach the loadMoreBooks function to the "Show more" button's click event
-        dataListButton.addEventListener('click', loadMoreBooks);
-    }
-
+    initializeTheme();
 });
+
 
 
 
