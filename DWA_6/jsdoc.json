@@ -2,9 +2,9 @@
   "plugins": ["plugins/markdown"],
   "recurseDepth": 10,
   "source": {
-    "include": ["src"],
+    "include": ["src", "BookConnect"],
     "includePattern": ".js$",
-    "excludePattern": "(node_modules/|docs)"
+    "excludePattern": "(node_modules/|docs), BookConnect/data.js"
   },
   "templates": {
     "cleverLinks": true,
