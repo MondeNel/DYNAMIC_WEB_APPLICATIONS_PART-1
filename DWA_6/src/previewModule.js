@@ -1,0 +1,9 @@
+export const previewModule = {
+    createPreview(bookData) {
+        // ...
+    },
+    handlePreviewClick() {
+        // ...
+    }
+    // ...
+};
