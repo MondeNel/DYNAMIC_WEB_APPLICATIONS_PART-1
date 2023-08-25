@@ -297,6 +297,12 @@ option {
   justify-content: center;
 }
 
+.overlay__buttons {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
 .overlay__button {
   font-family: Roboto, sans-serif;
   background-color: rgba(var(--color-blue), 0.1);
