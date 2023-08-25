@@ -11,9 +11,10 @@ export const app = {
     init() {
         bookModule.loadInitialBooks();
         themeModule.setupThemeSettings();
-
-        // Initialize other modules
-        // ...
+        formModule.initializeForms(); // Initialize formModule
+        searchModule.initializeSearch(); // Initialize searchModule
+        listModule.initializeList(); // Initialize listModule
+        previewModule.initializePreviews(); // Initialize previewModule
 
         headerModule.handleHeaderSearchClick();
     }
