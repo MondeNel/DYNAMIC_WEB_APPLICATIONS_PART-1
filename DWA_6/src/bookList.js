@@ -4,7 +4,7 @@ import { books, BOOKS_PER_PAGE } from "./data.js";
 
 let page = 1;
 
-function loadMoreBooks() {
+export function loadMoreBooks() {
     const rangeStart = (page - 1) * BOOKS_PER_PAGE;
     const rangeEnd = page * BOOKS_PER_PAGE;
     const extracted = books.slice(rangeStart, rangeEnd);

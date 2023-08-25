@@ -1,34 +1,38 @@
 // genreSelect.js
 import { genres } from "./data.js";
 
-const genresFragment = document.createDocumentFragment();
 
-const allGenresOption = document.createElement('option');
-allGenresOption.value = 'any';
-allGenresOption.innerText = 'All Genres';
-genresFragment.appendChild(allGenresOption);
+export function createGenreSelect() {
+    const genresFragment = document.createDocumentFragment();
 
-const genresEntries = Object.entries(genres);
+    const allGenresOption = document.createElement('option');
+    allGenresOption.value = 'any';
+    allGenresOption.innerText = 'All Genres';
+    genresFragment.appendChild(allGenresOption);
 
-for (const [id, name] of genresEntries) {
-    const genreOption = document.createElement('option');
-    genreOption.value = id;
-    genreOption.innerText = name;
-    genresFragment.appendChild(genreOption);
-}
+    const genresEntries = Object.entries(genres);
 
-const genresSelect = document.querySelector('[data-list-genres]');
+    for (const [id, name] of genresEntries) {
+        const genreOption = document.createElement('option');
+        genreOption.value = id;
+        genreOption.innerText = name;
+        genresFragment.appendChild(genreOption);
+    }
 
-if (genresSelect) {
-    genresSelect.innerHTML = '';
-    genresSelect.appendChild(allGenresOption);
-    genresSelect.appendChild(genresFragment);
-}
+    const genresSelect = document.querySelector('[data-list-genres]');
 
-const searchGenresContainer = document.querySelector('[data-search-genres]');
+    if (genresSelect) {
+        genresSelect.innerHTML = '';
+        genresSelect.appendChild(allGenresOption);
+        genresSelect.appendChild(genresFragment);
+    }
 
-if (searchGenresContainer) {
-    searchGenresContainer.innerHTML = '';
-    searchGenresContainer.appendChild(allGenresOption);
-    searchGenresContainer.appendChild(genresFragment);
+    const searchGenresContainer = document.querySelector('[data-search-genres]');
+
+    if (searchGenresContainer) {
+        searchGenresContainer.innerHTML = '';
+        searchGenresContainer.appendChild(allGenresOption);
+        searchGenresContainer.appendChild(genresFragment);
+    }
+
 }
