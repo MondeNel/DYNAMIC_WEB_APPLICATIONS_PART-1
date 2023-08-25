@@ -75,18 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
     document.documentElement.style.setProperty('--color-dark', themeColors[theme].dark);
     document.documentElement.style.setProperty('--color-light', themeColors[theme].light);
 
-    const dataListButton = document.querySelector('[data-list-button]');
-    if (dataListButton) {
-        const remainingBooks = books.length - (page * BOOKS_PER_PAGE);
-        const remainingText = remainingBooks > 0 ? remainingBooks : 0;
-
-        dataListButton.innerHTML = `<span>Show more</span><span class="list__remaining">(${remainingText})</span>`;
-
-        dataListButton.disabled = !(remainingBooks > 0);
-
-        dataListButton.addEventListener('click', loadMoreBooks);
-    }
-
     if (dataHeaderSettings) {
         dataHeaderSettings.addEventListener('click', showThemeSelectionDialog);
     }
