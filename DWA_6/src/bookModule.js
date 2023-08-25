@@ -1,15 +1,11 @@
-// bookModule.js
+import { books, BOOKS_PER_PAGE, authors } from "./data.js";
 
-import { books, genres, BOOKS_PER_PAGE, authors } from "./data.js";
-
-const booksList = books;
-let matches = books.slice(0, BOOKS_PER_PAGE);
 let page = 1;
 
 export const bookModule = {
     loadInitialBooks() {
         const dataListButton = document.querySelector('[data-list-button]');
-        dataListButton.addEventListener('click', this.loadMoreBooks);
+        dataListButton.addEventListener('click', () => this.loadMoreBooks());
         this.loadMoreBooks();
     },
 
@@ -74,7 +70,7 @@ export const bookModule = {
 
         const authorElement = document.createElement('div');
         authorElement.classList.add('preview__author');
-        const authorName = authors[authors];
+        const authorName = authors[authors]; // This line may need to be corrected based on your data structure
         authorElement.textContent = authorName;
 
         info.appendChild(genreElement);
@@ -87,6 +83,3 @@ export const bookModule = {
         return preview;
     },
 };
-
-
-// is working
