@@ -128,3 +128,18 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+export function initializeSearchOverlay() {
+    document.querySelector('[data-header-search]').addEventListener('click', function () {
+        const searchOverlay = document.querySelector('[data-search-overlay]');
+        const searchTitle = document.querySelector('[data-search-title]');
+
+        searchOverlay.open = true;
+        searchTitle.focus();
+    });
+}
+
+// Attach the event listener when DOM content is loaded
+document.addEventListener('DOMContentLoaded', function () {
+    initializeSearchOverlay();
+});

@@ -1,7 +1,14 @@
 import { books, genres, BOOKS_PER_PAGE, authors } from "./data.js";
 
 
-import { handleSearchFormSubmit, handleSearchCancelButtonClick, updateBookList, initializeSearchCancelButton } from './search.js';
+import {
+    handleSearchFormSubmit,
+    handleSearchCancelButtonClick,
+    updateBookList,
+    initializeSearchCancelButton,
+    initializeSearchOverlay
+}
+    from './search.js';
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -23,9 +30,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     initializeSearchCancelButton();
+    initializeSearchOverlay();
 });
 
-git 
+
+
+import { handleDataListButtonClick } from './dataListButton.js';
+
+// Attach the event listener when DOM content is loaded
+document.addEventListener('DOMContentLoaded', function () {
+    const authors = {}; // Define your authors object here or import it if needed
+    handleDataListButtonClick(authors);
+});
+
+// Other code in main.js
+
 
 
 

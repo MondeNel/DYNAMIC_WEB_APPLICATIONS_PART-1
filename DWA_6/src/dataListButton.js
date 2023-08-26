@@ -63,6 +63,6 @@ export function handleDataListButtonClick(authors) {
 
 // Attach the event listener when DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
-    const authors = {}; // Define your authors object here or import it if needed
+    const authors = {};
     handleDataListButtonClick(authors);
 });
