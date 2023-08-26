@@ -1,13 +1,4 @@
-// Get a reference to the button element
-const settingsButton = document.querySelector('[data-header-settings]');
-
-// Attach the event listener to the settings button
-settingsButton.addEventListener('click', handleSettingsButtonClick);
-
-// Attach the event listener to the search form
-const searchForm = document.querySelector('[data-search-form]');
-searchForm.addEventListener('submit', handleSearchFormSubmit);
-
+import { books, authors, BOOKS_PER_PAGE } from './data.js';
 
 export function handleSearchFormSubmit(event) {
     event.preventDefault();
@@ -15,43 +6,44 @@ export function handleSearchFormSubmit(event) {
     const filters = Object.fromEntries(formData);
     const results = [];
 
-    for (const book of booksList) {
+    for (const book of books) {
         const titleMatch = filters.title.trim() === '' || book.title.toLowerCase().includes(filters.title.toLowerCase());
-        const authorMatch = filters.author === 'any' || book.author === filters.author;
-        let genreMatch = true;
 
-        if (filters.genre !== 'any') {
-            genreMatch = book.genres.includes(filters.genre);
-        }
+        const authorId = filters.author;
+        const genre = filters.genre;
+
+        const authorMatch = authorId === 'any' || book.author === authorId;
+        const genreMatch = genre === 'any' || book.genres.includes(genre);
 
         if (titleMatch && authorMatch && genreMatch) {
             results.push(book);
         }
     }
 
-    // Call the function to update the book list with the filtered results
     updateBookList(results);
+
+    const searchCancelButton = document.querySelector('[data-search-cancel]');
+    const searchButton = document.querySelector('[data-search-button]');
+    if (searchCancelButton && searchButton) {
+        searchCancelButton.disabled = false;
+        searchButton.disabled = false;
+    }
 }
 
-// Implement the updateBookList function
-function updateBookList(results) {
-    // Get references to the required elements
+export function updateBookList(results) {
     const dataListItems = document.querySelector('[data-list-items]');
     const dataListButton = document.querySelector('[data-list-button]');
     const dataSearchOverlay = document.querySelector('[data-search-overlay]');
     const dataListMessage = document.querySelector('[data-list-message]');
 
-    // Calculate the remaining books count to be displayed in the 'Show more' button
     const remainingBooks = results.length - (page * BOOKS_PER_PAGE);
     const hasRemaining = remainingBooks > 0;
     const remaining = hasRemaining ? remainingBooks : 0;
 
-    // Disable the 'Show more' button if there are no remaining books
     if (dataListButton) {
         dataListButton.disabled = !hasRemaining;
     }
 
-    // Set the innerHTML of the 'Show more' button to display the remaining books count
     if (dataListButton) {
         dataListButton.innerHTML = `
             <span>Show more</span>
@@ -59,7 +51,6 @@ function updateBookList(results) {
         `;
     }
 
-    // Create a fragment to hold the new book previews
     const fragment = document.createDocumentFragment();
 
     for (const book of results) {
@@ -82,12 +73,10 @@ function updateBookList(results) {
     dataListItems.innerHTML = '';
     dataListItems.appendChild(fragment);
 
-    // Show or hide the "No results found" message based on the presence of search results
     if (dataListMessage) {
         dataListMessage.style.display = results.length === 0 ? 'block' : 'none';
     }
 
-    // Show or hide the overlay buttons based on the presence of search results
     if (dataListButton && dataListMessage) {
         dataListButton.style.display = results.length > 0 ? 'block' : 'none';
         dataListMessage.style.display = results.length === 0 ? 'block' : 'none';
@@ -101,11 +90,41 @@ function updateBookList(results) {
 }
 
 
-
-
-// Define a function to be called when the settings button is clicked
-function handleSettingsButtonClick() {
-    // Add your code here to handle the settings button click
-    // For example, you could open a settings overlay or perform some other action
-    console.log("Settings button clicked!");
+// Search Cancel Button Click Event
+export function handleSearchCancelButtonClick() {
+    const searchOverlayElement = document.querySelector('[data-search-overlay]');
+    if (searchOverlayElement.open === true) {
+        searchOverlayElement.open = false; // Close the search overlay
+    }
 }
+
+// Initialize Search Cancel Button
+export function initializeSearchCancelButton() {
+    const searchCancelButton = document.querySelector('[data-search-cancel]');
+    if (searchCancelButton) {
+        searchCancelButton.addEventListener('click', handleSearchCancelButtonClick);
+    }
+}
+
+// Search Form Event Listener
+document.addEventListener('DOMContentLoaded', function () {
+    const searchForm = document.querySelector('[data-search-form]');
+    if (searchForm) {
+        searchForm.addEventListener('submit', handleSearchFormSubmit);
+    }
+
+    // Initialize Search Cancel Button
+    initializeSearchCancelButton();
+
+    const searchOverlayElement = document.querySelector('[data-search-overlay]');
+    if (searchOverlayElement) {
+        searchOverlayElement.addEventListener('toggle', function () {
+            if (searchOverlayElement.open === true) {
+                const searchCancelButton = document.querySelector('[data-search-cancel]');
+                if (searchCancelButton) {
+                    searchCancelButton.disabled = false;
+                }
+            }
+        });
+    }
+});

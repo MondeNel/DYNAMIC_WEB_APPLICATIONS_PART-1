@@ -1,6 +1,6 @@
 // bookList.js
 import { createPreview } from "./preview.js";
-import { books, BOOKS_PER_PAGE } from "./data.js";
+import { books, BOOKS_PER_PAGE, authors } from "./data.js";
 
 let page = 1;
 
