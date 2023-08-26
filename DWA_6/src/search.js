@@ -1,4 +1,5 @@
 import { books, authors, BOOKS_PER_PAGE } from './data.js';
+import { page } from './bookList.js';
 
 export function handleSearchFormSubmit(event) {
     event.preventDefault();

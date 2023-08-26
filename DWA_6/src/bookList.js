@@ -2,6 +2,7 @@
 import { createPreview } from "./preview.js";
 import { books, BOOKS_PER_PAGE, authors } from "./data.js";
 
+
 let page = 1;
 
 export function loadMoreBooks() {
@@ -75,3 +76,4 @@ export function updateBookList(results) {
         listItemsContainer.appendChild(fragment);
     }
 }
+export { page };
