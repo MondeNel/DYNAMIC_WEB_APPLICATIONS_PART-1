@@ -1,4 +1,4 @@
-import { authors } from "./data.js";
+
 import {
     handleSearchFormSubmit,
     handleSearchCancelButtonClick,
@@ -45,8 +45,7 @@ import { handleDataListButtonClick } from './dataListButton.js';
  * Attach the event listener for data list button when DOM content is loaded.
  */
 document.addEventListener('DOMContentLoaded', function () {
-    const authorsData = {}; // Define your authors object here or import it if needed
-    handleDataListButtonClick(authorsData);
+    handleDataListButtonClick();
 });
 
 // Other code in main.js
@@ -63,10 +62,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-import { createAuthors } from './authorSelect.js';
+import { createAuthors } from './authorSelect.js'; // Make sure the correct path is provided
+import { authors } from "./data.js";
+
 
 document.addEventListener('DOMContentLoaded', function () {
-    createAuthors(authors);
+    const authorsSelect = document.querySelector('[data-list-authors]');
+    if (authorsSelect) {
+        createAuthors(authorsSelect, authors); // Pass the authorsSelect element and authors object
+    }
+
+    const searchAuthorsSelect = document.querySelector('[data-search-authors]');
+    if (searchAuthorsSelect) {
+        createAuthors(searchAuthorsSelect, authors); // Pass the searchAuthorsSelect element and authors object
+    }
 });
 
 import { createGenreSelect } from './genreSelect.js';
@@ -89,3 +98,20 @@ import { loadMoreBooks } from './bookList.js';
 document.addEventListener('DOMContentLoaded', function () {
     loadMoreBooks();
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const authorsSelect = document.querySelector('[data-list-authors]');
+    const searchAuthorsSelect = document.querySelector('[data-search-authors]');
+
+    if (authorsSelect) {
+        createAuthors(authorsSelect, authors); // Initializes author select options
+    }
+
+    if (searchAuthorsSelect) {
+        createAuthors(searchAuthorsSelect, authors); // Initializes author select options
+    }
+});
+
+
+
+

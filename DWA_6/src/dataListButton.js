@@ -1,11 +1,12 @@
-import { books } from './data.js'; // Import the books array
+import { books, authors } from './data.js';
+
 
 /**
  * Handles the click event for data list button.
  *
  * @param {Object} authors - An object containing authors' information.
  */
-export function handleDataListButtonClick(authors) {
+export function handleDataListButtonClick() {
     document.querySelector('[data-list-items]').addEventListener('click', function (event) {
         const pathArray = Array.from(event.path || event.composedPath());
         let active;
@@ -46,6 +47,8 @@ export function handleDataListButtonClick(authors) {
         }
         if (dataListSubtitle) {
             dataListSubtitle.textContent = `${authors[active.author]} (${new Date(active.published).getFullYear()})`;
+
+
         }
         if (dataListDescription) {
             dataListDescription.textContent = active.description;
@@ -74,3 +77,5 @@ document.addEventListener('DOMContentLoaded', function () {
     const authors = {}; // Define your authors object here or import it if needed
     handleDataListButtonClick(authors);
 });
+
+

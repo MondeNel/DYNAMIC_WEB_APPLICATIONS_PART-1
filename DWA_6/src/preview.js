@@ -1,6 +1,5 @@
-// preview.js
-export function createPreview(bookData) {
-    const { authors, id, image, title, genre } = bookData;
+export function createPreview(bookData, authors) {
+    const { author, id, image, title, genre } = bookData;
 
     const preview = document.createElement('div');
     preview.classList.add('preview');
@@ -21,9 +20,9 @@ export function createPreview(bookData) {
     genreElement.classList.add('preview__genre');
     genreElement.textContent = genre;
 
+    const authorName = authors[author]; // Get the author's name from the authors object
     const authorElement = document.createElement('div');
     authorElement.classList.add('preview__author');
-    const authorName = authors[authors];
     authorElement.textContent = authorName;
 
     info.appendChild(genreElement);

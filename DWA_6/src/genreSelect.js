@@ -2,6 +2,7 @@
 import { genres } from "./data.js";
 
 
+
 export function createGenreSelect() {
     const genresFragment = document.createDocumentFragment();
 

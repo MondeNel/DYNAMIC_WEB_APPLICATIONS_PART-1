@@ -17,14 +17,15 @@ export function loadMoreBooks() {
 
     const fragment = document.createDocumentFragment();
 
+
     for (const book of extracted) {
         const preview = createPreview({
-            authors: book.author,
+            author: book.author, // Pass the author ID
             id: book.id,
             image: book.image,
             title: book.title,
             genre: book.genre,
-        });
+        }, authors); // Pass the authors object
 
         fragment.appendChild(preview);
     }

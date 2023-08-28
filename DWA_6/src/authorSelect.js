@@ -1,3 +1,6 @@
+import { books, authors } from './data.js';
+
+
 /**
  * Creates author select options and appends them to the provided select element.
  * 
@@ -34,11 +37,11 @@ export function createAuthors(selectElement, authors) {
 document.addEventListener('DOMContentLoaded', function () {
     const authorsSelect = document.querySelector('[data-list-authors]');
     if (authorsSelect) {
-        createAuthors(authorsSelect, authors);
+        createAuthors(authorsSelect, authors); // Pass the select element and authors object
     }
 
     const searchAuthorsSelect = document.querySelector('[data-search-authors]');
     if (searchAuthorsSelect) {
-        createAuthors(searchAuthorsSelect, authors);
+        createAuthors(searchAuthorsSelect, authors); // Pass the select element and authors object
     }
 });
