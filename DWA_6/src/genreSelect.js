@@ -1,8 +1,8 @@
-// genreSelect.js
 import { genres } from "./data.js";
 
-
-
+/**
+ * Creates genre select options and appends them to the provided select elements.
+ */
 export function createGenreSelect() {
     const genresFragment = document.createDocumentFragment();
 
@@ -35,5 +35,4 @@ export function createGenreSelect() {
         searchGenresContainer.appendChild(allGenresOption);
         searchGenresContainer.appendChild(genresFragment);
     }
-
 }

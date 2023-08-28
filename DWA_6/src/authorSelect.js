@@ -1,13 +1,12 @@
 import { books, authors } from './data.js';
 
-
 /**
  * Creates author select options and appends them to the provided select element.
- * 
+ *
  * @param {HTMLElement} selectElement - The HTML select element to which author options will be appended.
- * @param {Object} authors - An object containing author information with author IDs as keys and author names as values.
+ * @param {Object} authorsData - An object containing author information with author IDs as keys and author names as values.
  */
-export function createAuthors(selectElement, authors) {
+export function createAuthors(selectElement, authorsData) {
     const authorsFragment = document.createDocumentFragment();
 
     const allAuthorsOption = document.createElement('option');
@@ -15,7 +14,7 @@ export function createAuthors(selectElement, authors) {
     allAuthorsOption.innerText = 'All Authors';
     authorsFragment.appendChild(allAuthorsOption);
 
-    const authorsEntries = Object.entries(authors);
+    const authorsEntries = Object.entries(authorsData);
 
     for (const [id, name] of authorsEntries) {
         const authorOption = document.createElement('option');
@@ -33,15 +32,19 @@ export function createAuthors(selectElement, authors) {
 
 /**
  * Initializes the author select options for both list view and search view.
+ *
+ * @event DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', function () {
     const authorsSelect = document.querySelector('[data-list-authors]');
     if (authorsSelect) {
-        createAuthors(authorsSelect, authors); // Pass the select element and authors object
+        // Initialize author select options for list view
+        createAuthors(authorsSelect, authors);
     }
 
     const searchAuthorsSelect = document.querySelector('[data-search-authors]');
     if (searchAuthorsSelect) {
-        createAuthors(searchAuthorsSelect, authors); // Pass the select element and authors object
+        // Initialize author select options for search view
+        createAuthors(searchAuthorsSelect, authors);
     }
 });

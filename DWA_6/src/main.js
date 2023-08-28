@@ -1,4 +1,3 @@
-
 import {
     handleSearchFormSubmit,
     handleSearchCancelButtonClick,
@@ -11,7 +10,8 @@ import {
  */
 document.addEventListener('DOMContentLoaded', function () {
     /**
-     * Search form submission event listener.
+     * Handles the submission of the search form.
+     *
      * @param {Event} event - The form submission event.
      */
     const searchForm = document.querySelector('[data-search-form]');
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     /**
-     * Search cancel button and overlay event listeners.
+     * Handles the click event for the search cancel button and overlay.
      */
     const searchCancelButton = document.querySelector('[data-search-cancel]');
     const searchOverlayElement = document.querySelector('[data-search-overlay]');
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 import { handleDataListButtonClick } from './dataListButton.js';
 
 /**
- * Attach the event listener for data list button when DOM content is loaded.
+ * Attach the event listener for the data list button when DOM content is loaded.
  */
 document.addEventListener('DOMContentLoaded', function () {
     handleDataListButtonClick();
@@ -56,31 +56,39 @@ document.addEventListener('DOMContentLoaded', function () {
     const settingsButton = document.querySelector('[data-header-settings]');
     if (settingsButton) {
         /**
-         * Event listener for theme selection dialog.
+         * Event listener for opening the theme selection dialog.
          */
         settingsButton.addEventListener('click', showThemeSelectionDialog);
     }
 });
 
-import { createAuthors } from './authorSelect.js'; // Make sure the correct path is provided
+import { createAuthors } from './authorSelect.js';
 import { authors } from "./data.js";
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const authorsSelect = document.querySelector('[data-list-authors]');
     if (authorsSelect) {
-        createAuthors(authorsSelect, authors); // Pass the authorsSelect element and authors object
+        /**
+         * Initializes author select options for the main book list.
+         */
+        createAuthors(authorsSelect, authors);
     }
 
     const searchAuthorsSelect = document.querySelector('[data-search-authors]');
     if (searchAuthorsSelect) {
-        createAuthors(searchAuthorsSelect, authors); // Pass the searchAuthorsSelect element and authors object
+        /**
+         * Initializes author select options for the search view.
+         */
+        createAuthors(searchAuthorsSelect, authors);
     }
 });
 
 import { createGenreSelect } from './genreSelect.js';
 
 document.addEventListener('DOMContentLoaded', function () {
+    /**
+     * Initializes genre select options for both list view and search view.
+     */
     createGenreSelect();
 });
 
@@ -96,6 +104,9 @@ document.addEventListener('DOMContentLoaded', function () {
 import { loadMoreBooks } from './bookList.js';
 
 document.addEventListener('DOMContentLoaded', function () {
+    /**
+     * Loads and appends more books to the book list.
+     */
     loadMoreBooks();
 });
 
@@ -104,14 +115,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchAuthorsSelect = document.querySelector('[data-search-authors]');
 
     if (authorsSelect) {
-        createAuthors(authorsSelect, authors); // Initializes author select options
+        /**
+         * Initializes author select options for the main book list.
+         */
+        createAuthors(authorsSelect, authors);
     }
 
     if (searchAuthorsSelect) {
-        createAuthors(searchAuthorsSelect, authors); // Initializes author select options
+        /**
+         * Initializes author select options for the search view.
+         */
+        createAuthors(searchAuthorsSelect, authors);
     }
 });
-
-
-
-

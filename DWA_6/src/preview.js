@@ -1,3 +1,15 @@
+/**
+ * Creates a preview element for a book.
+ *
+ * @param {Object} bookData - Data of the book to create a preview for.
+ * @param {string} bookData.author - Author ID of the book.
+ * @param {string} bookData.id - ID of the book.
+ * @param {string} bookData.image - Image URL of the book.
+ * @param {string} bookData.title - Title of the book.
+ * @param {string} bookData.genre - Genre of the book.
+ * @param {Object} authors - An object containing author information with author IDs as keys and author names as values.
+ * @returns {HTMLElement} - The created preview element.
+ */
 export function createPreview(bookData, authors) {
     const { author, id, image, title, genre } = bookData;
 
@@ -20,7 +32,7 @@ export function createPreview(bookData, authors) {
     genreElement.classList.add('preview__genre');
     genreElement.textContent = genre;
 
-    const authorName = authors[author]; // Get the author's name from the authors object
+    const authorName = authors[author];
     const authorElement = document.createElement('div');
     authorElement.classList.add('preview__author');
     authorElement.textContent = authorName;
