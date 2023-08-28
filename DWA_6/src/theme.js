@@ -1,4 +1,4 @@
-// theme.js
+//@ts-check
 
 // Determine if dark mode is preferred by default
 const isDarkModePreferred = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -34,8 +34,11 @@ export function showThemeSelectionDialog() {
     const dataListMessage = document.querySelector('[data-list-message]');
 
     if (themeDialog && overlayButtons && dataListMessage) {
+        //@ts-ignore
         dataListMessage.style.display = 'none';
+        //@ts-ignore
         overlayButtons.style.display = 'flex';
+        //@ts-ignore
         themeDialog.showModal();
     }
 }
@@ -47,6 +50,7 @@ export function showThemeSelectionDialog() {
  */
 function handleThemeSelectionAndSave(event) {
     event.preventDefault();
+    //@ts-ignore
 
     const selectedTheme = document.querySelector('[data-settings-theme]').value;
     if (selectedTheme === 'day' || selectedTheme === 'night') {
@@ -58,6 +62,7 @@ function handleThemeSelectionAndSave(event) {
     }
 
     const themeDialog = document.querySelector('[data-settings-overlay]');
+    //@ts-ignore
     themeDialog.close();
 }
 
@@ -69,6 +74,7 @@ function handleThemeSelectionAndSave(event) {
 function handleCancelButtonClick(event) {
     event.preventDefault();
     const themeDialog = document.querySelector('[data-settings-overlay]');
+    //@ts-ignore
     themeDialog.close();
 }
 

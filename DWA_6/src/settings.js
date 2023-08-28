@@ -1,3 +1,5 @@
+//@ts-check
+
 /**
  * Handles the click event for the settings button.
  */

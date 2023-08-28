@@ -28,12 +28,13 @@
         <article>
             <pre class="prettyprint source linenums"><code>import { books, authors } from './data.js';
 
+
 /**
- * Handles the click event for the data list button.
+ * Handles the click event for data list button.
  *
- * @param {Object} authorsData - An object containing authors' information.
+ * @param {Object} authors - An object containing authors' information.
  */
-export function handleDataListButtonClick(authorsData) {
+export function handleDataListButtonClick() {
     document.querySelector('[data-list-items]').addEventListener('click', function (event) {
         const pathArray = Array.from(event.path || event.composedPath());
         let active;
@@ -73,14 +74,16 @@ export function handleDataListButtonClick(authorsData) {
             dataListTitle.textContent = active.title;
         }
         if (dataListSubtitle) {
-            dataListSubtitle.textContent = `${authorsData[active.author]} (${new Date(active.published).getFullYear()})`;
+            dataListSubtitle.textContent = `${authors[active.author]} (${new Date(active.published).getFullYear()})`;
+
+
         }
         if (dataListDescription) {
             dataListDescription.textContent = active.description;
         }
 
         /**
-         * Handles the click event for the data list close button.
+         * Handles the click event for data list close button.
          *
          * @param {Event} event - The click event object.
          */
@@ -99,11 +102,9 @@ export function handleDataListButtonClick(authorsData) {
 
 // Attach the event listener when DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
-    // Define your authors object here or import it if needed
-    const authorsData = {};
-    handleDataListButtonClick(authorsData);
-});
-</code></pre>
+    const authors = {}; // Define your authors object here or import it if needed
+    handleDataListButtonClick(authors);
+});</code></pre>
         </article>
     </section>
 
@@ -113,13 +114,13 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
 
 <nav>
-    <h2><a href="index.html">Book Connect</a></h2><h3>Events</h3><ul><li><a href="Event.html#event:DOMContentLoaded">DOMContentLoaded</a></li><li><a href="Event.html#event:click">click</a></li><li><a href="Event.html#event:submit">submit</a></li><li><a href="global.html#event:DOMContentLoaded">DOMContentLoaded</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createAuthors">createAuthors</a></li><li><a href="global.html#createGenreSelect">createGenreSelect</a></li><li><a href="global.html#createPreview">createPreview</a></li><li><a href="global.html#handleCancelButtonClick">handleCancelButtonClick</a></li><li><a href="global.html#handleDataListButtonClick">handleDataListButtonClick</a></li><li><a href="global.html#handleSearchCancelButtonClick">handleSearchCancelButtonClick</a></li><li><a href="global.html#handleSearchFormSubmit">handleSearchFormSubmit</a></li><li><a href="global.html#handleSettingsButtonClick">handleSettingsButtonClick</a></li><li><a href="global.html#handleThemeSelectionAndSave">handleThemeSelectionAndSave</a></li><li><a href="global.html#initializeSearchCancelButton">initializeSearchCancelButton</a></li><li><a href="global.html#initializeSearchOverlay">initializeSearchOverlay</a></li><li><a href="global.html#loadInitialBooks">loadInitialBooks</a></li><li><a href="global.html#loadMoreBooks">loadMoreBooks</a></li><li><a href="global.html#page">page</a></li><li><a href="global.html#showThemeSelectionDialog">showThemeSelectionDialog</a></li><li><a href="global.html#toggleTheme">toggleTheme</a></li><li><a href="global.html#updateBookList">updateBookList</a></li></ul>
+    <h2><a href="index.html">Book Connect</a></h2><h3>Events</h3><ul><li><a href="Event.html#event:DOMContentLoaded">DOMContentLoaded</a></li><li><a href="Event.html#event:click">click</a></li><li><a href="Event.html#event:submit">submit</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createAuthors">createAuthors</a></li><li><a href="global.html#createGenreSelect">createGenreSelect</a></li><li><a href="global.html#createPreview">createPreview</a></li><li><a href="global.html#handleCancelButtonClick">handleCancelButtonClick</a></li><li><a href="global.html#handleDataListButtonClick">handleDataListButtonClick</a></li><li><a href="global.html#handleSearchCancelButtonClick">handleSearchCancelButtonClick</a></li><li><a href="global.html#handleSearchFormSubmit">handleSearchFormSubmit</a></li><li><a href="global.html#handleSettingsButtonClick">handleSettingsButtonClick</a></li><li><a href="global.html#handleThemeSelectionAndSave">handleThemeSelectionAndSave</a></li><li><a href="global.html#initializeSearchCancelButton">initializeSearchCancelButton</a></li><li><a href="global.html#initializeSearchOverlay">initializeSearchOverlay</a></li><li><a href="global.html#loadInitialBooks">loadInitialBooks</a></li><li><a href="global.html#loadMoreBooks">loadMoreBooks</a></li><li><a href="global.html#page">page</a></li><li><a href="global.html#showThemeSelectionDialog">showThemeSelectionDialog</a></li><li><a href="global.html#toggleTheme">toggleTheme</a></li><li><a href="global.html#updateBookList">updateBookList</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Aug 28 2023 14:13:23 GMT+0200 (South Africa Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Aug 28 2023 14:40:16 GMT+0200 (South Africa Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

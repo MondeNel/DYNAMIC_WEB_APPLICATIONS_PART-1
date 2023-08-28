@@ -1,3 +1,5 @@
+//@ts-check
+
 import { books, authors, BOOKS_PER_PAGE } from './data.js';
 import { page } from './bookList.js';
 
@@ -16,18 +18,21 @@ export function handleSearchFormSubmit(event) {
     event.preventDefault();
 
     // Extract filter data from form
+    //@ts-ignore
     const formData = new FormData(event.target);
     const filters = Object.fromEntries(formData);
     const results = [];
 
     // Loop through books and apply filters
     for (const book of books) {
+        //@ts-ignore
         const titleMatch = filters.title.trim() === '' || book.title.toLowerCase().includes(filters.title.toLowerCase());
 
         const authorId = filters.author;
         const genre = filters.genre;
 
         const authorMatch = authorId === 'any' || book.author === authorId;
+        //@ts-ignore
         const genreMatch = genre === 'any' || book.genres.includes(genre);
 
         if (titleMatch && authorMatch && genreMatch) {
@@ -45,7 +50,9 @@ export function handleSearchFormSubmit(event) {
         /**
          * Enables the search cancel and submit buttons.
          */
+        //@ts-ignore
         searchCancelButton.disabled = false;
+        //@ts-ignore
         searchButton.disabled = false;
     }
 }
@@ -70,6 +77,7 @@ export function updateBookList(results) {
 
     // Update "Show more" button
     if (dataListButton) {
+        //@ts-ignore
         dataListButton.disabled = !hasRemaining;
     }
 
@@ -103,17 +111,22 @@ export function updateBookList(results) {
     }
 
     // Clear and update data list items
+    //@ts-ignore
     dataListItems.innerHTML = '';
+    //@ts-ignore
     dataListItems.appendChild(fragment);
 
     // Show or hide no results message
     if (dataListMessage) {
+        //@ts-ignore
         dataListMessage.style.display = results.length === 0 ? 'block' : 'none';
     }
 
     // Show or hide "Show more" button and no results message
     if (dataListButton && dataListMessage) {
+        //@ts-ignore
         dataListButton.style.display = results.length > 0 ? 'block' : 'none';
+        //@ts-ignore
         dataListMessage.style.display = results.length === 0 ? 'block' : 'none';
     }
 
@@ -122,6 +135,7 @@ export function updateBookList(results) {
 
     // Close search overlay
     if (dataSearchOverlay) {
+        //@ts-ignore
         dataSearchOverlay.open = false;
     }
 }
@@ -131,10 +145,12 @@ export function updateBookList(results) {
  */
 export function handleSearchCancelButtonClick() {
     const searchOverlayElement = document.querySelector('[data-search-overlay]');
+    //@ts-ignore
     if (searchOverlayElement.open === true) {
         /**
          * Closes the search overlay when the search cancel button is clicked.
          */
+        //@ts-ignore
         searchOverlayElement.open = false;
     }
 }
@@ -174,9 +190,11 @@ document.addEventListener('DOMContentLoaded', function () {
             /**
              * Enables the search cancel button when the search overlay is open.
              */
+            //@ts-ignore
             if (searchOverlayElement.open === true) {
                 const searchCancelButton = document.querySelector('[data-search-cancel]');
                 if (searchCancelButton) {
+                    //@ts-ignore
                     searchCancelButton.disabled = false;
                 }
             }
@@ -188,6 +206,7 @@ document.addEventListener('DOMContentLoaded', function () {
  * Initializes the search overlay and attaches event listener for opening the overlay.
  */
 export function initializeSearchOverlay() {
+    //@ts-ignore
     document.querySelector('[data-header-search]').addEventListener('click', function () {
         const searchOverlay = document.querySelector('[data-search-overlay]');
         const searchTitle = document.querySelector('[data-search-title]');
@@ -195,7 +214,9 @@ export function initializeSearchOverlay() {
         /**
          * Opens the search overlay and focuses on the search input.
          */
+        //@ts-ignore
         searchOverlay.open = true;
+        //@ts-ignore
         searchTitle.focus();
     });
 }

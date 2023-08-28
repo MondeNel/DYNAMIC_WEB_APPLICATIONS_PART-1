@@ -488,148 +488,7 @@
 
             
 
-            <td class="description last"><p>Data of the book to create a preview for.</p>
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>author</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Author ID of the book.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>ID of the book.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>image</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Image URL of the book.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>title</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Title of the book.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>genre</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Genre of the book.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
+            <td class="description last"><p>The data of the book for which to create the preview.</p></td>
         </tr>
 
     
@@ -693,7 +552,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="preview.js.html">preview.js</a>, <a href="preview.js.html#line13">line 13</a>
+        <a href="preview.js.html">preview.js</a>, <a href="preview.js.html#line8">line 8</a>
     </li></ul></dd>
     
 
@@ -722,9 +581,7 @@
 
         
 <div class="param-desc">
-    <ul>
-<li>The created preview element.</li>
-</ul>
+    <p>The created preview element.</p>
 </div>
 
 
@@ -890,7 +747,7 @@
     
 
     
-    <h4 class="name" id="handleDataListButtonClick"><span class="type-signature"></span>handleDataListButtonClick<span class="signature">(authorsData)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="handleDataListButtonClick"><span class="type-signature"></span>handleDataListButtonClick<span class="signature">(authors)</span><span class="type-signature"></span></h4>
     
 
     
@@ -898,7 +755,7 @@
 
 
 <div class="description">
-    <p>Handles the click event for the data list button.</p>
+    <p>Handles the click event for data list button.</p>
 </div>
 
 
@@ -934,7 +791,7 @@
 
         <tr>
             
-                <td class="name"><code>authorsData</code></td>
+                <td class="name"><code>authors</code></td>
             
 
             <td class="type">
@@ -991,7 +848,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dataListButton.js.html">dataListButton.js</a>, <a href="dataListButton.js.html#line8">line 8</a>
+        <a href="dataListButton.js.html">dataListButton.js</a>, <a href="dataListButton.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -2279,98 +2136,6 @@
     
 
     
-        <h3 class="subsection-title">Events</h3>
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="event:DOMContentLoaded">DOMContentLoaded</h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Initializes the author select options for both list view and search view.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="authorSelect.js.html">authorSelect.js</a>, <a href="authorSelect.js.html#line33">line 33</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-    
 </article>
 
 </section>
@@ -2381,13 +2146,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Book Connect</a></h2><h3>Events</h3><ul><li><a href="Event.html#event:DOMContentLoaded">DOMContentLoaded</a></li><li><a href="Event.html#event:click">click</a></li><li><a href="Event.html#event:submit">submit</a></li><li><a href="global.html#event:DOMContentLoaded">DOMContentLoaded</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createAuthors">createAuthors</a></li><li><a href="global.html#createGenreSelect">createGenreSelect</a></li><li><a href="global.html#createPreview">createPreview</a></li><li><a href="global.html#handleCancelButtonClick">handleCancelButtonClick</a></li><li><a href="global.html#handleDataListButtonClick">handleDataListButtonClick</a></li><li><a href="global.html#handleSearchCancelButtonClick">handleSearchCancelButtonClick</a></li><li><a href="global.html#handleSearchFormSubmit">handleSearchFormSubmit</a></li><li><a href="global.html#handleSettingsButtonClick">handleSettingsButtonClick</a></li><li><a href="global.html#handleThemeSelectionAndSave">handleThemeSelectionAndSave</a></li><li><a href="global.html#initializeSearchCancelButton">initializeSearchCancelButton</a></li><li><a href="global.html#initializeSearchOverlay">initializeSearchOverlay</a></li><li><a href="global.html#loadInitialBooks">loadInitialBooks</a></li><li><a href="global.html#loadMoreBooks">loadMoreBooks</a></li><li><a href="global.html#page">page</a></li><li><a href="global.html#showThemeSelectionDialog">showThemeSelectionDialog</a></li><li><a href="global.html#toggleTheme">toggleTheme</a></li><li><a href="global.html#updateBookList">updateBookList</a></li></ul>
+    <h2><a href="index.html">Book Connect</a></h2><h3>Events</h3><ul><li><a href="Event.html#event:DOMContentLoaded">DOMContentLoaded</a></li><li><a href="Event.html#event:click">click</a></li><li><a href="Event.html#event:submit">submit</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createAuthors">createAuthors</a></li><li><a href="global.html#createGenreSelect">createGenreSelect</a></li><li><a href="global.html#createPreview">createPreview</a></li><li><a href="global.html#handleCancelButtonClick">handleCancelButtonClick</a></li><li><a href="global.html#handleDataListButtonClick">handleDataListButtonClick</a></li><li><a href="global.html#handleSearchCancelButtonClick">handleSearchCancelButtonClick</a></li><li><a href="global.html#handleSearchFormSubmit">handleSearchFormSubmit</a></li><li><a href="global.html#handleSettingsButtonClick">handleSettingsButtonClick</a></li><li><a href="global.html#handleThemeSelectionAndSave">handleThemeSelectionAndSave</a></li><li><a href="global.html#initializeSearchCancelButton">initializeSearchCancelButton</a></li><li><a href="global.html#initializeSearchOverlay">initializeSearchOverlay</a></li><li><a href="global.html#loadInitialBooks">loadInitialBooks</a></li><li><a href="global.html#loadMoreBooks">loadMoreBooks</a></li><li><a href="global.html#page">page</a></li><li><a href="global.html#showThemeSelectionDialog">showThemeSelectionDialog</a></li><li><a href="global.html#toggleTheme">toggleTheme</a></li><li><a href="global.html#updateBookList">updateBookList</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Aug 28 2023 14:13:23 GMT+0200 (South Africa Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Aug 28 2023 14:40:16 GMT+0200 (South Africa Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

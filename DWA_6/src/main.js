@@ -1,3 +1,5 @@
+//@ts-check
+
 // Import necessary modules
 import {
     handleSearchFormSubmit,
@@ -28,7 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
         searchCancelButton.addEventListener('click', handleSearchCancelButtonClick);
 
         searchOverlayElement.addEventListener('toggle', function () {
+            //@ts-ignore
             if (searchOverlayElement.open === true) {
+                //@ts-ignore
                 searchCancelButton.disabled = false;
             }
         });
@@ -57,9 +61,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const authorsSelect = document.querySelector('[data-list-authors]');
     const searchAuthorsSelect = document.querySelector('[data-search-authors]');
     if (authorsSelect) {
+        //@ts-ignore
         createAuthors(authorsSelect, authors); // Pass the authorsSelect element and authors object
     }
     if (searchAuthorsSelect) {
+        //@ts-ignore
         createAuthors(searchAuthorsSelect, authors); // Pass the searchAuthorsSelect element and authors object
     }
 });
@@ -82,14 +88,3 @@ document.addEventListener('DOMContentLoaded', function () {
     loadMoreBooks();
 });
 
-// Additional initialization of author select options
-document.addEventListener('DOMContentLoaded', function () {
-    const authorsSelect = document.querySelector('[data-list-authors]');
-    const searchAuthorsSelect = document.querySelector('[data-search-authors]');
-    if (authorsSelect) {
-        createAuthors(authorsSelect, authors);
-    }
-    if (searchAuthorsSelect) {
-        createAuthors(searchAuthorsSelect, authors);
-    }
-});

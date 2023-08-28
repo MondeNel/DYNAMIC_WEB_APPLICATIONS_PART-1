@@ -30,21 +30,21 @@
 
 /**
  * Creates author select options and appends them to the provided select element.
- *
+ * 
  * @param {HTMLElement} selectElement - The HTML select element to which author options will be appended.
  * @param {Object} authorsData - An object containing author information with author IDs as keys and author names as values.
  */
 export function createAuthors(selectElement, authorsData) {
     const authorsFragment = document.createDocumentFragment();
 
+    // Create "All Authors" option
     const allAuthorsOption = document.createElement('option');
     allAuthorsOption.value = 'any';
     allAuthorsOption.innerText = 'All Authors';
     authorsFragment.appendChild(allAuthorsOption);
 
-    const authorsEntries = Object.entries(authorsData);
-
-    for (const [id, name] of authorsEntries) {
+    // Loop through authorsData to create author options
+    for (const [id, name] of Object.entries(authorsData)) {
         const authorOption = document.createElement('option');
         authorOption.value = id;
         authorOption.innerText = name;
@@ -52,6 +52,7 @@ export function createAuthors(selectElement, authorsData) {
     }
 
     if (selectElement) {
+        // Clear existing options and append new options
         selectElement.innerHTML = '';
         selectElement.appendChild(allAuthorsOption);
         selectElement.appendChild(authorsFragment);
@@ -60,20 +61,18 @@ export function createAuthors(selectElement, authorsData) {
 
 /**
  * Initializes the author select options for both list view and search view.
- *
- * @event DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', function () {
-    const authorsSelect = document.querySelector('[data-list-authors]');
-    if (authorsSelect) {
-        // Initialize author select options for list view
-        createAuthors(authorsSelect, authors);
+    // Initialize author select options for list view
+    const authorsSelectList = document.querySelector('[data-list-authors]');
+    if (authorsSelectList) {
+        createAuthors(authorsSelectList, authors);
     }
 
-    const searchAuthorsSelect = document.querySelector('[data-search-authors]');
-    if (searchAuthorsSelect) {
-        // Initialize author select options for search view
-        createAuthors(searchAuthorsSelect, authors);
+    // Initialize author select options for search view
+    const authorsSelectSearch = document.querySelector('[data-search-authors]');
+    if (authorsSelectSearch) {
+        createAuthors(authorsSelectSearch, authors);
     }
 });
 </code></pre>
@@ -86,13 +85,13 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
 
 <nav>
-    <h2><a href="index.html">Book Connect</a></h2><h3>Events</h3><ul><li><a href="Event.html#event:DOMContentLoaded">DOMContentLoaded</a></li><li><a href="Event.html#event:click">click</a></li><li><a href="Event.html#event:submit">submit</a></li><li><a href="global.html#event:DOMContentLoaded">DOMContentLoaded</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createAuthors">createAuthors</a></li><li><a href="global.html#createGenreSelect">createGenreSelect</a></li><li><a href="global.html#createPreview">createPreview</a></li><li><a href="global.html#handleCancelButtonClick">handleCancelButtonClick</a></li><li><a href="global.html#handleDataListButtonClick">handleDataListButtonClick</a></li><li><a href="global.html#handleSearchCancelButtonClick">handleSearchCancelButtonClick</a></li><li><a href="global.html#handleSearchFormSubmit">handleSearchFormSubmit</a></li><li><a href="global.html#handleSettingsButtonClick">handleSettingsButtonClick</a></li><li><a href="global.html#handleThemeSelectionAndSave">handleThemeSelectionAndSave</a></li><li><a href="global.html#initializeSearchCancelButton">initializeSearchCancelButton</a></li><li><a href="global.html#initializeSearchOverlay">initializeSearchOverlay</a></li><li><a href="global.html#loadInitialBooks">loadInitialBooks</a></li><li><a href="global.html#loadMoreBooks">loadMoreBooks</a></li><li><a href="global.html#page">page</a></li><li><a href="global.html#showThemeSelectionDialog">showThemeSelectionDialog</a></li><li><a href="global.html#toggleTheme">toggleTheme</a></li><li><a href="global.html#updateBookList">updateBookList</a></li></ul>
+    <h2><a href="index.html">Book Connect</a></h2><h3>Events</h3><ul><li><a href="Event.html#event:DOMContentLoaded">DOMContentLoaded</a></li><li><a href="Event.html#event:click">click</a></li><li><a href="Event.html#event:submit">submit</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createAuthors">createAuthors</a></li><li><a href="global.html#createGenreSelect">createGenreSelect</a></li><li><a href="global.html#createPreview">createPreview</a></li><li><a href="global.html#handleCancelButtonClick">handleCancelButtonClick</a></li><li><a href="global.html#handleDataListButtonClick">handleDataListButtonClick</a></li><li><a href="global.html#handleSearchCancelButtonClick">handleSearchCancelButtonClick</a></li><li><a href="global.html#handleSearchFormSubmit">handleSearchFormSubmit</a></li><li><a href="global.html#handleSettingsButtonClick">handleSettingsButtonClick</a></li><li><a href="global.html#handleThemeSelectionAndSave">handleThemeSelectionAndSave</a></li><li><a href="global.html#initializeSearchCancelButton">initializeSearchCancelButton</a></li><li><a href="global.html#initializeSearchOverlay">initializeSearchOverlay</a></li><li><a href="global.html#loadInitialBooks">loadInitialBooks</a></li><li><a href="global.html#loadMoreBooks">loadMoreBooks</a></li><li><a href="global.html#page">page</a></li><li><a href="global.html#showThemeSelectionDialog">showThemeSelectionDialog</a></li><li><a href="global.html#toggleTheme">toggleTheme</a></li><li><a href="global.html#updateBookList">updateBookList</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Aug 28 2023 14:13:23 GMT+0200 (South Africa Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Aug 28 2023 14:40:16 GMT+0200 (South Africa Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

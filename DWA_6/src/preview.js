@@ -1,3 +1,5 @@
+//@ts-check
+
 /**
  * Creates a preview element for a book.
  *

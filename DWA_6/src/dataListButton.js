@@ -1,13 +1,15 @@
+//@ts-check
+
 import { books, authors } from './data.js';
 
 
 /**
  * Handles the click event for data list button.
- *
- * @param {Object} authors - An object containing authors' information.
  */
 export function handleDataListButtonClick() {
+    // @ts-ignore
     document.querySelector('[data-list-items]').addEventListener('click', function (event) {
+        // @ts-ignore
         const pathArray = Array.from(event.path || event.composedPath());
         let active;
 
@@ -34,12 +36,15 @@ export function handleDataListButtonClick() {
         const dataListDescription = document.querySelector('[data-list-description]');
 
         if (dataListActive) {
+            // @ts-ignore
             dataListActive.open = true;
         }
         if (dataListBlur) {
+            // @ts-ignore
             dataListBlur.src = active ? '' : active.image;
         }
         if (dataListImage) {
+            // @ts-ignore
             dataListImage.src = active ? active.image : '';
         }
         if (dataListTitle) {
@@ -61,6 +66,7 @@ export function handleDataListButtonClick() {
          */
         function handleDataListCloseClick(event) {
             if (dataListActive) {
+                // @ts-ignore
                 dataListActive.open = false;
             }
         }
@@ -75,5 +81,6 @@ export function handleDataListButtonClick() {
 // Attach the event listener when DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
     const authors = {}; // Define your authors object here or import it if needed
+    // @ts-ignore
     handleDataListButtonClick(authors);
 });

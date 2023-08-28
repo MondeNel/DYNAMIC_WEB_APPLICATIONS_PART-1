@@ -1,6 +1,10 @@
 {
   "devDependencies": {
-    "jsdoc": "^4.0.2"
+    "eslint": "^8.48.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "jsdoc": "^4.0.2",
+    "prettier": "3.0.2"
   },
   "name": "dwa_6",
   "description": "This documentation was written and submitted by Monde Nel, a dedicated software developer student currently enrolled at Codespace Academy. Feel free to explore Monde's GitHub account for further insights into his studies and projects.",

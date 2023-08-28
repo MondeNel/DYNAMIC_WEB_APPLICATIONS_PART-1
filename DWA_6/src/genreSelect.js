@@ -1,3 +1,5 @@
+//@ts-check
+
 import { genres } from "./data.js";
 
 /**

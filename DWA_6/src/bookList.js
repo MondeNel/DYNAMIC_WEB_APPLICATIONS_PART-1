@@ -1,3 +1,5 @@
+//@ts-check
+
 import { createPreview } from "./preview.js";
 import { books, BOOKS_PER_PAGE, authors } from "./data.js";
 
@@ -29,7 +31,7 @@ export function loadMoreBooks() {
         fragment.appendChild(preview);
     }
 
-    const listItemsContainer = document.querySelector('[data-list-items]');
+    const listItemsContainer = /** @type {HTMLDivElement} */ (document.querySelector('[data-list-items]'));
 
     if (listItemsContainer) {
         listItemsContainer.appendChild(fragment);
@@ -37,7 +39,7 @@ export function loadMoreBooks() {
     page++;
 
     const dataListButton = document.querySelector('[data-list-button]');
-    if (dataListButton) {
+    if (dataListButton instanceof HTMLButtonElement) { // Check if dataListButton is an instance of HTMLButtonElement
         const totalBooks = books.length;
         const remainingBooks = totalBooks - (page * BOOKS_PER_PAGE);
         const remainingText = remainingBooks > 0 ? remainingBooks : 0;
@@ -55,9 +57,11 @@ export function loadMoreBooks() {
 function loadInitialBooks() {
     const dataListButton = document.querySelector('[data-list-button]');
 
-    dataListButton.addEventListener('click', loadMoreBooks);
+    if (dataListButton instanceof HTMLButtonElement) {
+        dataListButton.addEventListener('click', loadMoreBooks);
 
-    loadMoreBooks();
+        loadMoreBooks();
+    }
 }
 
 document.addEventListener('DOMContentLoaded', loadInitialBooks);
@@ -82,7 +86,7 @@ export function updateBookList(results) {
         fragment.appendChild(preview);
     }
 
-    const listItemsContainer = document.querySelector('[data-list-items]');
+    const listItemsContainer = /** @type {HTMLDivElement} */ (document.querySelector('[data-list-items]'));
 
     if (listItemsContainer) {
         listItemsContainer.innerHTML = ''; // Clear existing content
