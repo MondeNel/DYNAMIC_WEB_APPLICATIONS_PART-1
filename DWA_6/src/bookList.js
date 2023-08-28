@@ -42,9 +42,9 @@ export function loadMoreBooks() {
         const remainingBooks = totalBooks - (page * BOOKS_PER_PAGE);
         const remainingText = remainingBooks > 0 ? remainingBooks : 0;
         dataListButton.innerHTML = `
-      <span>Show more</span>
-      <span class="list__remaining">(${remainingText})</span>
-    `;
+            <span>Show more</span>
+            <span class="list__remaining">(${remainingText})</span>
+        `;
         dataListButton.disabled = remainingBooks <= 0;
     }
 }
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', loadInitialBooks);
 
 /**
  * Updates the book list with the provided results.
- *
+ * 
  * @param {Array} results - An array of book objects to be displayed in the book list.
  */
 export function updateBookList(results) {

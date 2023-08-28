@@ -1,3 +1,4 @@
+// Import necessary modules
 import {
     handleSearchFormSubmit,
     handleSearchCancelButtonClick,
@@ -5,23 +6,22 @@ import {
     initializeSearchOverlay,
 } from './search.js';
 
-/**
- * Initialize search form and search overlay event listeners.
- */
+import { handleDataListButtonClick } from './dataListButton.js';
+import { showThemeSelectionDialog } from './theme.js';
+import { createAuthors } from './authorSelect.js';
+import { createGenreSelect } from './genreSelect.js';
+import { handleSettingsButtonClick } from './settings.js';
+import { loadMoreBooks } from './bookList.js';
+
+// Initialize search form and search overlay event listeners
 document.addEventListener('DOMContentLoaded', function () {
-    /**
-     * Handles the submission of the search form.
-     *
-     * @param {Event} event - The form submission event.
-     */
+    // Search form submission event listener
     const searchForm = document.querySelector('[data-search-form]');
     if (searchForm) {
         searchForm.addEventListener('submit', handleSearchFormSubmit);
     }
 
-    /**
-     * Handles the click event for the search cancel button and overlay.
-     */
+    // Search cancel button and overlay event listeners
     const searchCancelButton = document.querySelector('[data-search-cancel]');
     const searchOverlayElement = document.querySelector('[data-search-overlay]');
     if (searchCancelButton && searchOverlayElement) {
@@ -39,61 +39,37 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeSearchOverlay();
 });
 
-import { handleDataListButtonClick } from './dataListButton.js';
-
-/**
- * Attach the event listener for the data list button when DOM content is loaded.
- */
+// Attach the event listener for data list button when DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
     handleDataListButtonClick();
 });
 
-// Other code in main.js
-
-import { showThemeSelectionDialog } from './theme.js';
-
+// Event listener for theme selection dialog
 document.addEventListener('DOMContentLoaded', function () {
     const settingsButton = document.querySelector('[data-header-settings]');
     if (settingsButton) {
-        /**
-         * Event listener for opening the theme selection dialog.
-         */
         settingsButton.addEventListener('click', showThemeSelectionDialog);
     }
 });
 
-import { createAuthors } from './authorSelect.js';
-import { authors } from "./data.js";
-
+// Initialize author select options for main book list and search view
 document.addEventListener('DOMContentLoaded', function () {
     const authorsSelect = document.querySelector('[data-list-authors]');
-    if (authorsSelect) {
-        /**
-         * Initializes author select options for the main book list.
-         */
-        createAuthors(authorsSelect, authors);
-    }
-
     const searchAuthorsSelect = document.querySelector('[data-search-authors]');
+    if (authorsSelect) {
+        createAuthors(authorsSelect, authors); // Pass the authorsSelect element and authors object
+    }
     if (searchAuthorsSelect) {
-        /**
-         * Initializes author select options for the search view.
-         */
-        createAuthors(searchAuthorsSelect, authors);
+        createAuthors(searchAuthorsSelect, authors); // Pass the searchAuthorsSelect element and authors object
     }
 });
 
-import { createGenreSelect } from './genreSelect.js';
-
+// Initialize genre select options for both list view and search view
 document.addEventListener('DOMContentLoaded', function () {
-    /**
-     * Initializes genre select options for both list view and search view.
-     */
     createGenreSelect();
 });
 
-import { handleSettingsButtonClick } from './settings.js';
-
+// Event listener for settings button click
 document.addEventListener('DOMContentLoaded', function () {
     const settingsButton = document.querySelector('[data-header-settings]');
     if (settingsButton) {
@@ -101,30 +77,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-import { loadMoreBooks } from './bookList.js';
-
+// Load more books when DOM content is loaded
 document.addEventListener('DOMContentLoaded', function () {
-    /**
-     * Loads and appends more books to the book list.
-     */
     loadMoreBooks();
 });
 
+// Additional initialization of author select options
 document.addEventListener('DOMContentLoaded', function () {
     const authorsSelect = document.querySelector('[data-list-authors]');
     const searchAuthorsSelect = document.querySelector('[data-search-authors]');
-
     if (authorsSelect) {
-        /**
-         * Initializes author select options for the main book list.
-         */
         createAuthors(authorsSelect, authors);
     }
-
     if (searchAuthorsSelect) {
-        /**
-         * Initializes author select options for the search view.
-         */
         createAuthors(searchAuthorsSelect, authors);
     }
 });

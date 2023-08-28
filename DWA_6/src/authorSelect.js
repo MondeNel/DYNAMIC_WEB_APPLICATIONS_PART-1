@@ -2,21 +2,21 @@ import { books, authors } from './data.js';
 
 /**
  * Creates author select options and appends them to the provided select element.
- *
+ * 
  * @param {HTMLElement} selectElement - The HTML select element to which author options will be appended.
  * @param {Object} authorsData - An object containing author information with author IDs as keys and author names as values.
  */
 export function createAuthors(selectElement, authorsData) {
     const authorsFragment = document.createDocumentFragment();
 
+    // Create "All Authors" option
     const allAuthorsOption = document.createElement('option');
     allAuthorsOption.value = 'any';
     allAuthorsOption.innerText = 'All Authors';
     authorsFragment.appendChild(allAuthorsOption);
 
-    const authorsEntries = Object.entries(authorsData);
-
-    for (const [id, name] of authorsEntries) {
+    // Loop through authorsData to create author options
+    for (const [id, name] of Object.entries(authorsData)) {
         const authorOption = document.createElement('option');
         authorOption.value = id;
         authorOption.innerText = name;
@@ -24,6 +24,7 @@ export function createAuthors(selectElement, authorsData) {
     }
 
     if (selectElement) {
+        // Clear existing options and append new options
         selectElement.innerHTML = '';
         selectElement.appendChild(allAuthorsOption);
         selectElement.appendChild(authorsFragment);
@@ -32,19 +33,17 @@ export function createAuthors(selectElement, authorsData) {
 
 /**
  * Initializes the author select options for both list view and search view.
- *
- * @event DOMContentLoaded
  */
 document.addEventListener('DOMContentLoaded', function () {
-    const authorsSelect = document.querySelector('[data-list-authors]');
-    if (authorsSelect) {
-        // Initialize author select options for list view
-        createAuthors(authorsSelect, authors);
+    // Initialize author select options for list view
+    const authorsSelectList = document.querySelector('[data-list-authors]');
+    if (authorsSelectList) {
+        createAuthors(authorsSelectList, authors);
     }
 
-    const searchAuthorsSelect = document.querySelector('[data-search-authors]');
-    if (searchAuthorsSelect) {
-        // Initialize author select options for search view
-        createAuthors(searchAuthorsSelect, authors);
+    // Initialize author select options for search view
+    const authorsSelectSearch = document.querySelector('[data-search-authors]');
+    if (authorsSelectSearch) {
+        createAuthors(authorsSelectSearch, authors);
     }
 });
