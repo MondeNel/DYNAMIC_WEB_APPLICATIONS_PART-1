@@ -1,6 +1,7 @@
-// theme.js
-
 //@ts-check
+
+
+/** =====================================  Theme =================================== */
 
 // Determine if dark mode is preferred by default
 const isDarkModePreferred = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -103,9 +104,7 @@ document.documentElement.style.setProperty('--color-dark', themeColors[theme].da
 document.documentElement.style.setProperty('--color-light', themeColors[theme].light);
 
 
-// settings.js
-
-//@ts-check
+/** =====================================  Settings =================================== */
 
 /**
  * Handles the click event for the settings button.

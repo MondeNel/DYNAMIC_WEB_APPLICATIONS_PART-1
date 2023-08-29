@@ -1,4 +1,5 @@
 //@ts-check
+import { authors } from './data.js';
 
 // Import necessary modules
 import {
@@ -6,14 +7,14 @@ import {
     handleSearchCancelButtonClick,
     initializeSearchCancelButton,
     initializeSearchOverlay,
-} from './search.js';
+} from './searchFunctionality.js';
 
-import { handleDataListButtonClick } from './dataListButton.js';
-import { showThemeSelectionDialog } from './theme.js';
-import { createAuthors } from './authorSelect.js';
-import { createGenreSelect } from './genreSelect.js';
-import { handleSettingsButtonClick } from './settings.js';
-import { loadMoreBooks } from './bookList.js';
+import { handleDataListButtonClick } from './booklistFunctionality.js';
+import { showThemeSelectionDialog } from './themeSettings.js';
+import { createAuthors } from './searchFunctionality.js';
+import { createGenreSelect } from './searchFunctionality.js';
+import { handleSettingsButtonClick } from './themeSettings.js';
+import { loadMoreBooks } from './booklistFunctionality.js';
 
 // Initialize search form and search overlay event listeners
 document.addEventListener('DOMContentLoaded', function () {

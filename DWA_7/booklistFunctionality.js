@@ -2,7 +2,7 @@
 
 //@ts-check
 
-import { createPreview } from "./preview.js";
+import { createPreview } from "./previewFunctionality.js";
 import { books, BOOKS_PER_PAGE, authors } from "./data.js";
 
 /**
@@ -102,9 +102,6 @@ export { page };
 
 // dataListButton.js
 
-//@ts-check
-
-import { books, authors } from './data.js';
 
 
 /**
