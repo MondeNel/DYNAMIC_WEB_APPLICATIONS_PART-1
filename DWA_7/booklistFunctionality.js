@@ -1,5 +1,3 @@
-//Booklist.js
-
 //@ts-check
 
 import { createPreview } from "./previewFunctionality.js";
@@ -22,29 +20,32 @@ export function loadMoreBooks() {
     const fragment = document.createDocumentFragment();
 
     for (const book of extracted) {
-        const preview = createPreview({
-            author: book.author, // Pass the author ID
-            id: book.id,
-            image: book.image,
-            title: book.title,
-            genre: book.genre,
-        }, authors); // Pass the authors object
-
+        const preview = createPreview(book, authors);
         fragment.appendChild(preview);
     }
 
-    const listItemsContainer = /** @type {HTMLDivElement} */ (document.querySelector('[data-list-items]'));
+    const listItemsContainer = document.querySelector('[data-list-items]');
 
     if (listItemsContainer) {
         listItemsContainer.appendChild(fragment);
     }
+
     page++;
 
+    updateDataListButton();
+}
+
+/**
+ * Updates the "Show more" button based on the remaining books.
+ */
+function updateDataListButton() {
     const dataListButton = document.querySelector('[data-list-button]');
-    if (dataListButton instanceof HTMLButtonElement) { // Check if dataListButton is an instance of HTMLButtonElement
+
+    if (dataListButton instanceof HTMLButtonElement) {
         const totalBooks = books.length;
         const remainingBooks = totalBooks - (page * BOOKS_PER_PAGE);
         const remainingText = remainingBooks > 0 ? remainingBooks : 0;
+
         dataListButton.innerHTML = `
             <span>Show more</span>
             <span class="list__remaining">(${remainingText})</span>
@@ -61,7 +62,6 @@ function loadInitialBooks() {
 
     if (dataListButton instanceof HTMLButtonElement) {
         dataListButton.addEventListener('click', loadMoreBooks);
-
         loadMoreBooks();
     }
 }
@@ -77,21 +77,14 @@ export function updateBookList(results) {
     const fragment = document.createDocumentFragment();
 
     for (const book of results) {
-        const preview = createPreview({
-            author: book.author,
-            id: book.id,
-            image: book.image,
-            title: book.title,
-            genre: book.genre,
-        }, authors);
-
+        const preview = createPreview(book, authors);
         fragment.appendChild(preview);
     }
 
-    const listItemsContainer = /** @type {HTMLDivElement} */ (document.querySelector('[data-list-items]'));
+    const listItemsContainer = document.querySelector('[data-list-items]');
 
     if (listItemsContainer) {
-        listItemsContainer.innerHTML = ''; // Clear existing content
+        listItemsContainer.innerHTML = '';
         listItemsContainer.appendChild(fragment);
     }
 }
@@ -99,8 +92,8 @@ export function updateBookList(results) {
 // Export the 'page' variable
 export { page };
 
+/** =================================== Data ===================================== */
 
-// dataListButton.js
 
 
 
@@ -179,9 +172,9 @@ export function handleDataListButtonClick() {
     });
 }
 
-// Attach the event listener when DOM content is loaded
+
 document.addEventListener('DOMContentLoaded', function () {
-    const authors = {}; // Define your authors object here or import it if needed
+    const authors = {};
     // @ts-ignore
     handleDataListButtonClick(authors);
 });

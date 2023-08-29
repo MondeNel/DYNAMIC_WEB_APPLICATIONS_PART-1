@@ -22,7 +22,8 @@ const themeColors = {
 /**
  * Toggles between day and night themes.
  */
-export function toggleTheme() {
+export function toggleTheme(event) {
+    event.preventDefault();
     theme = theme === 'day' ? 'night' : 'day';
     document.documentElement.style.setProperty('--color-dark', themeColors[theme].dark);
     document.documentElement.style.setProperty('--color-light', themeColors[theme].light);
