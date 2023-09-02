@@ -13,3 +13,8 @@ document.querySelector(".decrementButton").addEventListener('click', () => {
         document.querySelector(".counter").textContent = COUNTER;
     }
 });
+
+document.querySelector(".resetButton").addEventListener('click', () => {
+    COUNTER = 0;
+    document.querySelector(".counter").textContent = COUNTER;
+});
