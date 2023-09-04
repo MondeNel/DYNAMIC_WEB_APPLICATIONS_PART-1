@@ -1,42 +1,52 @@
-
-
-/**
- * The counter variable to keep track of the current tally count.
- * @type {number}
- */
 let COUNTER = 0;
+const MAX_COUNT = 10;
 
-/**
- * Increment the tally counter when the "Add" button is clicked.
- * @function
- * @listens click
- */
-document.querySelector(".incrementButton").addEventListener('click', () => {
-    COUNTER += 1;
-    document.querySelector(".counter").textContent = COUNTER;
-});
+function updateProgressBar() {
+    const progressBar = document.querySelector(".progress-bar");
+    const percentage = (COUNTER / MAX_COUNT) * 100;
+    progressBar.value = percentage;
+}
 
-/**
- * Decrement the tally counter when the "Subtract" button is clicked.
- * @function
- * @listens click
- */
-document.querySelector(".decrementButton").addEventListener('click', () => {
-    COUNTER -= 1;
-    document.querySelector(".counter").textContent = COUNTER;
-});
+function showResetMessage() {
+    const resetAlert = document.querySelector(".resetAlert");
+    resetAlert.open = true; // Display reset message
+}
 
-/**
- * Reset the tally counter to zero when the "Reset" button is clicked.
- * If the counter is not already at zero, a confirmation message is displayed.
- * @function
- * @listens click
- */
-document.querySelector(".resetButton").addEventListener('click', () => {
+function hideResetMessage() {
+    const resetAlert = document.querySelector(".resetAlert");
+    resetAlert.open = false; // Hide reset message
+}
+
+function incrementCounter() {
+    if (COUNTER < MAX_COUNT) {
+        COUNTER += 1;
+        document.querySelector(".counter").textContent = COUNTER;
+        updateProgressBar();
+    }
+}
+
+function decrementCounter() {
+    if (COUNTER > 0) {
+        COUNTER -= 1;
+        document.querySelector(".counter").textContent = COUNTER;
+        updateProgressBar();
+    }
+}
+
+function resetCounter() {
     if (COUNTER !== 0) {
         COUNTER = 0;
         document.querySelector(".counter").textContent = COUNTER;
-        const resetAlert = document.querySelector(".resetAlert");
-        resetAlert.open = true; // Display reset message
+        updateProgressBar();
+        showResetMessage(); // Display reset message when resetting
+        setTimeout(hideResetMessage, 3000); // Hide reset message after 3 seconds (adjust as needed)
     }
-});
+}
+
+// Attach event listeners to buttons
+document.querySelector(".incrementButton").addEventListener('click', incrementCounter);
+document.querySelector(".decrementButton").addEventListener('click', decrementCounter);
+document.querySelector(".resetButton").addEventListener('click', resetCounter);
+
+// Initialize progress bar
+updateProgressBar();
