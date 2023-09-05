@@ -37,5 +37,6 @@
 .progress-bar {
   width: 100%;
   padding-top: 20px;
-  /* Add padding to separate the progress bar from buttons */
+  --height: 6px
+    /* Add padding to separate the progress bar from buttons */
 }
