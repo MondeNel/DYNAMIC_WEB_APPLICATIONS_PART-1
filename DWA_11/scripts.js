@@ -34,4 +34,23 @@ const counter = (state = 0, action) => {
 // Create the Redux store
 const store = Redux.createStore(counter);
 
+// Display the state in the console whenever it changes
+store.subscribe(() => console.log(store.getState()));
 
+// Get references to the buttons in your HTML
+const incrementButton = document.querySelector('.incrementButton');
+const decrementButton = document.querySelector('.decrementButton');
+const resetButton = document.querySelector('.resetButton');
+
+// Add event listeners to the buttons
+incrementButton.addEventListener('click', () => {
+    store.dispatch(increment());
+});
+
+decrementButton.addEventListener('click', () => {
+    store.dispatch(decrement());
+});
+
+resetButton.addEventListener('click', () => {
+    store.dispatch(reset());
+});
