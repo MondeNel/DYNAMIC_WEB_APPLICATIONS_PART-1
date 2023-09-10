@@ -1,0 +1,52 @@
+ /* Style the Header */
+ .header {
+     font-size: 25px;
+     font-weight: bold;
+     margin-bottom: 20px;
+     color: #080808;
+     text-align: center;
+     font-family: sans-serif;
+ }
+
+ /* Style the container for the counter and buttons with a background color */
+ .container {
+     background-color: #f0f0f0;
+     width: 300px;
+     height: 300px;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     margin: 0 auto;
+     padding: 20px;
+ }
+
+ /* Center the counter value */
+ .counter {
+     font-size: 36px;
+     display: block;
+     margin-bottom: 20px;
+ }
+
+ /* Style buttons */
+ .buttons {
+     display: flex;
+     flex-direction: row;
+     justify-content: center;
+ }
+
+ .decrementButton,
+ .resetButton,
+ .incrementButton {
+     font-size: 18px;
+     margin: 5px;
+     width: 100px;
+ }
+
+ /* Display progress bar below the buttons with padding */
+ .progress-bar {
+     width: 100%;
+     padding-top: 20px;
+     --height: 6px
+         /* Add padding to separate the progress bar from buttons */
+ }

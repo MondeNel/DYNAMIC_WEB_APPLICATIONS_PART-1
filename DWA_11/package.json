@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
+    "redux": "^4.2.1"
+  },
+  "name": "dwa_11",
+  "description": "- GIVEN no interactions have been performed yet\r - WHEN the “getState” method is run\r - AND the result is logged to the console\r - AND the browser console is open\r - THEN the state should show a count of 0",
+  "version": "1.0.0",
+  "main": "scripts.js",
+  "scripts": {
+    "start": "start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
