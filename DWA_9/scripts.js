@@ -1,5 +1,12 @@
-// Define a class for the book-preview web component
+/**
+ * Represents a custom web component for displaying a book preview.
+ * @extends HTMLElement
+ */
 class BookPreview extends HTMLElement {
+    /**
+     * Creates a new instance of the `BookPreview` class.
+     * @constructor
+     */
     constructor() {
         super(); // Call the constructor of the parent class (HTMLElement)
 
@@ -21,7 +28,7 @@ class BookPreview extends HTMLElement {
                     display: block;
                     padding: 16px;
                     background-color: lightgray;
-                }
+                }  
             </style>
             <img class="preview__image" src="${image}" alt="Book Cover">
             <h3 class="preview__title">${title}</h3>
