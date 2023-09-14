@@ -157,3 +157,33 @@ const nameProvinceMap = names.reduce((accumulator, name, index) => {
 console.log(nameProvinceMap);
 
 
+
+
+
+
+// Exercise 2
+
+const products = [
+    { product: 'banana', price: "2" },
+    { product: 'mango', price: 6 },
+    { product: 'potato', price: ' ' },
+    { product: 'avocado', price: "8" },
+    { product: 'coffee', price: 10 },
+    { product: 'tea', price: '' },
+]
+
+/* -------------------------- forEach ---------------------- */
+
+products.forEach((item) => {
+    console.log(item.product);
+});
+
+
+
+/* -------------------------- Filter ---------------------- */
+
+const filteredProducts = products.filter((item) => item.product.length <= 5);
+
+console.log(filteredProducts);
+
+
