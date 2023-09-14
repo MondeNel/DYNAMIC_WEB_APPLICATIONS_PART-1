@@ -187,3 +187,29 @@ const filteredProducts = products.filter((item) => item.product.length <= 5);
 console.log(filteredProducts);
 
 
+
+/* -------------------------- Filter, Map & Reduce (Combined) ---------------------- */
+
+/**
+ * Filters products with valid prices and calculates their combined price.
+ *
+ * @function
+ * @name filterProductsAndCalculatePrice
+ * @param {Object} [products] - An array of products with "product" and "price" properties.
+ * @returns {Object} An array of filtered products with valid prices.
+ * @returns {number} The combined price of all remaining products.
+ */
+
+// Use filter to remove products without valid prices
+const filterProducts = products
+    .filter((item) => typeof item.price === 'number' || (typeof item.price === 'string' && item.price.trim() !== ''));
+
+// Use reduce to calculate the combined price of all remaining products
+const combinedPrice = filterProducts.reduce((total, item) => total + Number(item.price), 0);
+
+console.log(filterProducts);
+console.log(`Combined Price: R${combinedPrice.toFixed(2)}`);
+
+
+
+
