@@ -212,4 +212,40 @@ console.log(`Combined Price: R${combinedPrice.toFixed(2)}`);
 
 
 
+/* -------------------------- Map() to concatenate ---------------------- */
+
+const productNames = products.map((product) => product.product);
+
+// Use the join method to concatenate the product names with commas and "and"
+const concatenatedNames = productNames.join(', ');
+
+// Finally, I have the 'concatenatedNames' string that lists all the product names together.
+console.log(concatenatedNames);
+
+
+
+/* -------------------------- Reduce() to concatenate ---------------------- */
+
+let concatenateOfNames = '';
+
+// I use a loop, specifically the 'reduce' method, to go through each product.
+products.reduce((accumulator, product, index, array) => {
+    // I add the current product's name to the 'concatenatedNames' string.
+    concatenateOfNames += product.product;
+
+    // If it's not the last product, I add a comma and space for separation.
+    if (index !== array.length - 1) {
+        concatenateOfNames += ', ';
+    }
+}, '');
+
+// Finally, I have the 'concatenatedNames' string that lists all the product names together.
+console.log(concatenateOfNames);
+
+
+
+
+
+
+
 
