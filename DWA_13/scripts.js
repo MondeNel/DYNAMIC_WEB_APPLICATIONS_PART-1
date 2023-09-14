@@ -133,3 +133,27 @@ console.log(nameContainsS);
 
 
 
+
+
+
+/* ------------------------------------ Reduce --------------------------------------- */
+
+/**
+ * Create a mapping of names to their corresponding provinces using the reduce method.
+ *
+ * @function
+ * @param {string} [names] - An array of names to be mapped.
+ * @param {string} [provinces] - An array of provinces to be mapped.
+ * @returns {Object} An object where names are keys and provinces are values.
+ */
+
+// Use reduce to create a mapping of names to provinces
+const nameProvinceMap = names.reduce((accumulator, name, index) => {
+    // Assign each name to its corresponding province in the accumulator object
+    accumulator[name] = provinces[index];
+    return accumulator;
+}, {});
+
+console.log(nameProvinceMap);
+
+
