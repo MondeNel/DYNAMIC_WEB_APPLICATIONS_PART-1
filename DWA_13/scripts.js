@@ -172,80 +172,73 @@ const products = [
     { product: 'tea', price: '' },
 ]
 
-/* -------------------------- forEach ---------------------- */
+console.log(
+    // forEach
+    products.forEach((item) => {
+        console.log(item.product);
+    }),
 
-products.forEach((item) => {
-    console.log(item.product);
-});
+    // Filter
+    products.filter((item) => item.product.length <= 5),
 
+    // Filter, Map & Reduce (Combined)
+    (() => {
+        const filterProducts = products.filter(
+            (item) =>
+                typeof item.price === 'number' ||
+                (typeof item.price === 'string' && item.price.trim() !== '')
+        );
 
+        const combinedPrice = filterProducts.reduce(
+            (total, item) => total + Number(item.price),
+            0
+        );
 
-/* -------------------------- Filter ---------------------- */
+        return [filterProducts, `Combined Price: R${combinedPrice.toFixed(2)}`];
+    })(),
 
-const filteredProducts = products.filter((item) => item.product.length <= 5);
+    // Map() to concatenate
+    products.map((product) => product.product).join(', '),
 
-console.log(filteredProducts);
+    // Reduce() to concatenate
+    products.reduce((accumulator, product, index, array) => {
+        const concatenatedNames = accumulator + product.product;
+        return index !== array.length - 1
+            ? concatenatedNames + ', '
+            : concatenatedNames;
+    }, ''),
 
+    // Reduce() calculate the Highest & Lowest price
+    (() => {
+        const { highest, lowest } = products.reduce(
+            (result, product) => {
+                const price = parseFloat(product.price);
+                if (!isNaN(price)) {
+                    if (result.highest === null || price > result.highest.price) {
+                        result.highest = { product: product.product, price: price };
+                    }
+                    if (result.lowest === null || price < result.lowest.price) {
+                        result.lowest = { product: product.product, price: price };
+                    }
+                }
+                return result;
+            },
+            { highest: null, lowest: null }
+        );
+        return `Highest: ${highest.product}. Lowest: ${lowest.product}`;
+    })(),
 
-
-/* -------------------------- Filter, Map & Reduce (Combined) ---------------------- */
-
-/**
- * Filters products with valid prices and calculates their combined price.
- *
- * @function
- * @name filterProductsAndCalculatePrice
- * @param {Object} [products] - An array of products with "product" and "price" properties.
- * @returns {Object} An array of filtered products with valid prices.
- * @returns {number} The combined price of all remaining products.
- */
-
-// Use filter to remove products without valid prices
-const filterProducts = products
-    .filter((item) => typeof item.price === 'number' || (typeof item.price === 'string' && item.price.trim() !== ''));
-
-// Use reduce to calculate the combined price of all remaining products
-const combinedPrice = filterProducts.reduce((total, item) => total + Number(item.price), 0);
-
-console.log(filterProducts);
-console.log(`Combined Price: R${combinedPrice.toFixed(2)}`);
-
-
-
-/* -------------------------- Map() to concatenate ---------------------- */
-
-const productNames = products.map((product) => product.product);
-
-// Use the join method to concatenate the product names with commas and "and"
-const concatenatedNames = productNames.join(', ');
-
-// Finally, I have the 'concatenatedNames' string that lists all the product names together.
-console.log(concatenatedNames);
-
-
-
-/* -------------------------- Reduce() to concatenate ---------------------- */
-
-let concatenateOfNames = '';
-
-// I use a loop, specifically the 'reduce' method, to go through each product.
-products.reduce((accumulator, product, index, array) => {
-    // I add the current product's name to the 'concatenatedNames' string.
-    concatenateOfNames += product.product;
-
-    // If it's not the last product, I add a comma and space for separation.
-    if (index !== array.length - 1) {
-        concatenateOfNames += ', ';
-    }
-}, '');
-
-// Finally, I have the 'concatenatedNames' string that lists all the product names together.
-console.log(concatenateOfNames);
-
-
-
-
-
-
-
-
+    // Change names of 'product & price'
+    products.map((product) => {
+        return Object.entries(product).reduce((result, [key, value]) => {
+            if (key === 'product') {
+                result.name = value;
+            } else if (key === 'price') {
+                result.cost = value;
+            } else {
+                result[key] = value;
+            }
+            return result;
+        }, {});
+    })
+);
